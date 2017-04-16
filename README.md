@@ -73,10 +73,10 @@ In this case, the individual allele frequency file is required. In this example,
 Detailed meanings of flags of modelAF module are summarized below.   
   
   ```
-  -i  Specify the name of the SNP genotype input file of reference samples. SEEKIN only reads compressed (gzipped) VCF files. [no default value] 
-  -c 	Specify the name of PCA coordinate file of reference samples. [no default value]
-  -k 	Specify the number of PCs to compute. This number should be no more than the number of PCs in the input PCA coordinate file. [default 2]. 
-  -o 	Specify the output file name. [no default value]
+  -i Specify the name of the SNP genotype input file of reference samples. SEEKIN only reads compressed (gzipped) VCF files. [no default value] 
+  -c Specify the name of PCA coordinate file of reference samples. [no default value]
+  -k Specify the number of PCs to compute. This number should be no more than the number of PCs in the input PCA coordinate file. [default 2]. 
+  -o Specify the output file name. [no default value]
   ```
   
 Using the `SGVP268.beta` file generated above, the following command can be used to estimate the individual allele frequencies of studies samples: 
@@ -114,20 +114,20 @@ The terminal outputs are used to monitor and record the progress for each module
 
 This file provides the kinship estimation for all pairs of individuals. Each row in this file provides information for a pair of individuals. The first line is the header line. The first two columns correspond to the individual ID for the first and second individual of pair, respectively. The third column denotes the number of SNPs used for kinship estimation, and the fourth column represents the estimated kinship coefficient. One example is as following: 
   ```
-  Ind1            Ind2            NSNP    Kinship      
-  ME-BBGMMRQ      ME-HIUWPTI      8592    0.0231     
-  ME-BBGMMRQ      ME-5P732EC      8592    0.0370        
-  ME-BBGMMRQ      ME-0HTMIKI      8592    0.0168      
+  Ind1    Ind2    NSNP    Kinship      
+  S1      S2      8592    0.0231     
+  S1      S3      8592    0.0370        
+  S1      S4      8592    0.0168      
   ```
   
 * 6.3 _.inbreed 
 
 This file provides the estimation of inbreeding coefficient estimation for each individual. Each row provides information for an individual. The columns are individual ID and SEEKIN inbreeding coefficient estimate, respectively. One example is as following:
   ```
-  Ind1            Inbreed_coef
-  ME-BBGMMRQ       0.0296
-  ME-HIUWPTI       0.0228
-  ME-5P732EC      -0.0338
+  Ind1    Inbreed_coef
+  S1       0.0296
+  S2       0.0228
+  S3      -0.0338
   ```
   
 * 6.4 _.index and _.matrix 
@@ -165,7 +165,6 @@ Use the `getAF` module in SEEKIN, we will generate the file which contains the i
 4.Sudmant, P.H. et al. An integrated map of structural variation in 2,504 human genomes. Nature 526, 75-81 (2015).
 5.International HapMap, C. A haplotype map of the human genome. Nature 437, 1299-320 (2005).
 6.Conomos, M.P., Reiner, A.P., Weir, B.S. & Thornton, T.A. Model-free Estimation of Recent Genetic Relatedness. Am J Hum Genet 98, 127-48 (2016).
-
 ```
 
 
