@@ -41,16 +41,19 @@ SEEKIN provides three modules
 * **modelAF** for calculating the PC-related regression coefficients of reference samples;
 * **getAF** for estimating the individual allele frequencies of study samples; 
 * **kinship** for estimating kinship coefficients for samples from either homogenous or admixture population.  
+
 To get the detailed list of option for one module (for example `kinship`), you can type: `seekin kinship –h`  
 
 ## 5 Examples
 
 * 5.1 Kinship estimation using homogenous samples
 
-Here we provide example usages of SEEKIN program based on the data provided in the folder named `example`. In this folder, we have the `Study.chr22.vcf.gz` file that includes genotypes of chromosome 22 for 10 samples. Except for the genotype files, we also have two PCA coordinate files in a plain text format: 1) `SGVP_268.chr22.RefPC.coord` file which contains PCA coordinates for the top 2 PCs of the reference individuals; 2) `Study.chr22.ProPC.coord` file which contains the top 2 PCs calculated by projecting the study samples on the reference panel using LASER. 
+Here we provide example usages of SEEKIN program based on the data provided in the folder named `example`. In this folder, we have the `Study.chr22.vcf.gz` file that includes genotypes of chromosome 22 for 10 studied samples. 
 The command line for running SEEKIN for homogenous samples is very simple.   
   ```./seekin kinship -i ./Study.chr22.vcf.gz  -r 0.3  -m 0.05   -d DS  -p homo  -n 2000  -t 3  -w  1 -o Study.chr22.homo``` 
+  
 It will generate result files with prefixes `Study.chr22.homo` specified by `–o` flag in the current directory. The detailed meanings of flags of `kinship` module are summarized below.  
+
   ```
   -i Specify the name of the SNP genotype input file of studied samples. SEEKIN only reads compressed (gzipped) VCF files. [no default value]
   -a Specify the name of the individual allele frequency file of studied samples. SEEKIN only reads compressed (gzipped) VCF files. Note that this option cannot be used for homogenous estimation. [no default value]
@@ -66,17 +69,17 @@ It will generate result files with prefixes `Study.chr22.homo` specified by `–
   
 * 5.2 Kinship estimation of samples with admixture 
 
-In this case, the individual allele frequency file is required. In this example, we use the SGVP as reference panel to model the PC-related linear regression coefficients based on the ```modelAF``` module:
+Except for the genotype files, we also have two PCA coordinate files in a plain text format: 1) `SGVP_268.chr22.RefPC.coord` file which contains PCA coordinates for the top 2 PCs of the reference individuals; 2) `Study.chr22.ProPC.coord` file which contains the top 2 PCs calculated by projecting the study samples on the reference panel using LASER.  In this example, we use the SGVP as reference panel to model the PC-related linear regression coefficients based on the ```modelAF``` module:
 
   ```seekin modelAF –i SGVP_268.chr22.vcf.gz –c SGVP_268.chr22.RefPC.coord -k 2 –o SGVP_268.chr22.beta```
   
-Detailed meanings of flags of modelAF module are summarized below.   
+Detailed meanings of flags of `modelAF` module are summarized below.   
   
   ```
-  -i  Specify the name of the SNP genotype input file of reference samples. SEEKIN only reads compressed (gzipped) VCF files. [no default value] 
-  -c 	Specify the name of PCA coordinate file of reference samples. [no default value]
-  -k 	Specify the number of PCs to compute. This number should be no more than the number of PCs in the input PCA coordinate file. [default 2]. 
-  -o 	Specify the output file name. [no default value]
+  -i Specify the name of the SNP genotype input file of reference samples. SEEKIN only reads compressed (gzipped) VCF files. [no default value] 
+  -c Specify the name of PCA coordinate file of reference samples. [no default value]
+  -k Specify the number of PCs to compute. This number should be no more than the number of PCs in the input PCA coordinate file. [default 2]. 
+  -o Specify the output file name. [no default value]
   ```
   
 Using the `SGVP268.beta` file generated above, the following command can be used to estimate the individual allele frequencies of studies samples: 
@@ -114,20 +117,20 @@ The terminal outputs are used to monitor and record the progress for each module
 
 This file provides the kinship estimation for all pairs of individuals. Each row in this file provides information for a pair of individuals. The first line is the header line. The first two columns correspond to the individual ID for the first and second individual of pair, respectively. The third column denotes the number of SNPs used for kinship estimation, and the fourth column represents the estimated kinship coefficient. One example is as following: 
   ```
-  Ind1            Ind2            NSNP    Kinship      
-  ME-BBGMMRQ      ME-HIUWPTI      8592    0.0231     
-  ME-BBGMMRQ      ME-5P732EC      8592    0.0370        
-  ME-BBGMMRQ      ME-0HTMIKI      8592    0.0168      
+  Ind1    Ind2    NSNP    Kinship      
+  S1      S2      8592    0.0231     
+  S1      S3      8592    0.0370        
+  S1      S4      8592    0.0168      
   ```
   
 * 6.3 _.inbreed 
 
 This file provides the estimation of inbreeding coefficient estimation for each individual. Each row provides information for an individual. The columns are individual ID and SEEKIN inbreeding coefficient estimate, respectively. One example is as following:
   ```
-  Ind1            Inbreed_coef
-  ME-BBGMMRQ       0.0296
-  ME-HIUWPTI       0.0228
-  ME-5P732EC      -0.0338
+  Ind1    Inbreed_coef
+  S1       0.0296
+  S2       0.0228
+  S3      -0.0338
   ```
   
 * 6.4 _.index and _.matrix 
@@ -165,7 +168,6 @@ Use the `getAF` module in SEEKIN, we will generate the file which contains the i
 4.Sudmant, P.H. et al. An integrated map of structural variation in 2,504 human genomes. Nature 526, 75-81 (2015).
 5.International HapMap, C. A haplotype map of the human genome. Nature 437, 1299-320 (2005).
 6.Conomos, M.P., Reiner, A.P., Weir, B.S. & Thornton, T.A. Model-free Estimation of Recent Genetic Relatedness. Am J Hum Genet 98, 127-48 (2016).
-
 ```
 
 
