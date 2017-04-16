@@ -48,10 +48,12 @@ To get the detailed list of option for one module (for example `kinship`), you c
 
 * 5.1 Kinship estimation using homogenous samples
 
-Here we provide example usages of SEEKIN program based on the data provided in the folder named `example`. In this folder, we have the `Study.chr22.vcf.gz` file that includes genotypes of chromosome 22 for 10 samples. Except for the genotype files, we also have two PCA coordinate files in a plain text format: 1) `SGVP_268.chr22.RefPC.coord` file which contains PCA coordinates for the top 2 PCs of the reference individuals; 2) `Study.chr22.ProPC.coord` file which contains the top 2 PCs calculated by projecting the study samples on the reference panel using LASER. 
+Here we provide example usages of SEEKIN program based on the data provided in the folder named `example`. In this folder, we have the `Study.chr22.vcf.gz` file that includes genotypes of chromosome 22 for 10 studied samples. 
 The command line for running SEEKIN for homogenous samples is very simple.   
   ```./seekin kinship -i ./Study.chr22.vcf.gz  -r 0.3  -m 0.05   -d DS  -p homo  -n 2000  -t 3  -w  1 -o Study.chr22.homo``` 
+  
 It will generate result files with prefixes `Study.chr22.homo` specified by `–o` flag in the current directory. The detailed meanings of flags of `kinship` module are summarized below.  
+
   ```
   -i Specify the name of the SNP genotype input file of studied samples. SEEKIN only reads compressed (gzipped) VCF files. [no default value]
   -a Specify the name of the individual allele frequency file of studied samples. SEEKIN only reads compressed (gzipped) VCF files. Note that this option cannot be used for homogenous estimation. [no default value]
@@ -67,7 +69,7 @@ It will generate result files with prefixes `Study.chr22.homo` specified by `–
   
 * 5.2 Kinship estimation of samples with admixture 
 
-In this case, the individual allele frequency file is required. In this example, we use the SGVP as reference panel to model the PC-related linear regression coefficients based on the ```modelAF``` module:
+Except for the genotype files, we also have two PCA coordinate files in a plain text format: 1) `SGVP_268.chr22.RefPC.coord` file which contains PCA coordinates for the top 2 PCs of the reference individuals; 2) `Study.chr22.ProPC.coord` file which contains the top 2 PCs calculated by projecting the study samples on the reference panel using LASER.  In this example, we use the SGVP as reference panel to model the PC-related linear regression coefficients based on the ```modelAF``` module:
 
   ```seekin modelAF –i SGVP_268.chr22.vcf.gz –c SGVP_268.chr22.RefPC.coord -k 2 –o SGVP_268.chr22.beta```
   
