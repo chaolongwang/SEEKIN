@@ -73,7 +73,7 @@ Except for the genotype files, we also have two PCA coordinate files in a plain 
 
   ```seekin modelAF –i SGVP_268.chr22.vcf.gz –c SGVP_268.chr22.RefPC.coord -k 2 –o SGVP_268.chr22.beta```
   
-Detailed meanings of flags of modelAF module are summarized below.   
+Detailed meanings of flags of `modelAF` module are summarized below.   
   
   ```
   -i Specify the name of the SNP genotype input file of reference samples. SEEKIN only reads compressed (gzipped) VCF files. [no default value] 
