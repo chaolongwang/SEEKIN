@@ -41,6 +41,7 @@ SEEKIN provides three modules
 * **modelAF** for calculating the PC-related regression coefficients of reference samples;
 * **getAF** for estimating the individual allele frequencies of study samples; 
 * **kinship** for estimating kinship coefficients for samples from either homogenous or admixture population.  
+
 To get the detailed list of option for one module (for example `kinship`), you can type: `seekin kinship –h`  
 
 ## 5 Examples
