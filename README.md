@@ -3,7 +3,7 @@
 
 #### author: Jinzhuang Dou  <douj@gis.a-star.edu.sg>, Chaolong Wang <wangcl@gis.a-star.edu.sg>
 
-#### license: GUN
+#### license: GNU General Public License v3.0 (GPLv3)
 ---
 
 ## 1 Overview
