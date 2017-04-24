@@ -55,8 +55,8 @@ The command line for running SEEKIN for homogenous samples is very simple.
 It will generate result files with prefixes `Study.chr22.homo` specified by `–o` flag in the current directory. The detailed meanings of flags of `kinship` module are summarized below.  
 
   ```
-  -i Specify the name of the SNP genotype input file of studied samples. SEEKIN only reads compressed (gzipped) VCF files. [no default value]
-  -a Specify the name of the individual allele frequency file of studied samples. SEEKIN only reads compressed (gzipped) VCF files. Note that this option cannot be used for homogenous estimation. [no default value]
+  -i Specify the name of the SNP genotype input file of study samples. SEEKIN only reads compressed (gzipped) VCF files. [no default value]
+  -a Specify the name of the individual allele frequency file of study samples. SEEKIN only reads compressed (gzipped) VCF files. Note that this option cannot be used for homogenous estimation. [no default value]
   -r Remove sites with Rsq less than the “-r” value. [default  0.3]  
   -m Remove sites with MAF less than the “-m” value. [default 0.05]  
   -d Specify the kinship estimation based on observed or imputed genotypes. It is “GT” if using observed genotypes and “DS” using imputed genotypes. If no DS information is available for a marker in the VCF file, the GT filed will be used even though the option –d is set to DS. If both GT and DS information available, we recommend using DS mode, because our model could account for genotype uncertainty effectively. [default DS]  
@@ -82,16 +82,16 @@ Detailed meanings of flags of `modelAF` module are summarized below.
   -o Specify the output file name. [no default value]
   ```
   
-Using the `SGVP268.beta` file generated above, the following command can be used to estimate the individual allele frequencies of studies samples: 
+Using the `SGVP268.beta` file generated above, the following command can be used to estimate the individual allele frequencies of stduy samples: 
 
   ```
   seekin getAF –i Study.chr22.ProPC.coord -b  SGVP_268.chr22.beta  -k 2 –o Study.chr22.indvAF.vcf
   ```
   
-In above command, the `Study.chr22.ProPC.coord` file is the projected PCA coordinate file of the studied samples on the reference panel, and we recommend the users to read the LASER documentation carefully for more information. The detailed meanings of flags of `getAF` module are summarized below. 
+In above command, the `Study.chr22.ProPC.coord` file is the projected PCA coordinate file of the study samples on the reference panel, and we recommend the users to read the LASER documentation carefully for more information. The detailed meanings of flags of `getAF` module are summarized below. 
 
   ```
-  -i Specify the PCA coordinate file of studies samples. [no default value] 
+  -i Specify the PCA coordinate file of study samples. [no default value] 
   -b Specify the PC-related regression coefficient file of reference samples. [no default value]
   -k Specify the number of PCs to compute. This number should be no more than the number of PCs in the input PCA coordinate file. [default 2]. 
   -o Specify the output file name. The output is the compressed VCF format. [no default value]
@@ -146,7 +146,7 @@ Use the `modelAF` module in SEEKIN, we will generate the file which contains the
   10     70969    G       A        0.41     0.96    -0.10    
   ```
   
-* 6.6 Individual allele frequencies file of studied samples  
+* 6.6 Individual allele frequencies file of study samples  
 
 Use the `getAF` module in SEEKIN, we will generate the file which contains the individual allele frequencies for each sample. The generated file is the standard VCF in the compressed format as following: 
   ```
