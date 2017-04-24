@@ -30,7 +30,7 @@ The download package contains a standalone (i.e., statically linked) 64-bit Linu
 
   4. Enter the cloned directory `cd ./src` and type `make` to compile the programs. 
 
-  5. Once make is finished the executables are ready in the folder `<PathWhereIWantToCloneSEEKIN>/SEEKIN/bin/`. Set this path as an  environment variable in the .bashrc file to access executables form everywhere on your proile OR call the executables from the path where they are. 
+  5. Once make is finished the executables are ready in the folder `<PathWhereIWantToCloneSEEKIN>/SEEKIN/bin/`. Set this path as an  environment variable in the .bashrc file to access executables form everywhere on your proile or call the executables from the path where they are. 
 
 
 
@@ -97,7 +97,7 @@ In above command, the `Study.chr22.ProPC.coord` file is the projected PCA coordi
   -o Specify the output file name. The output is the compressed VCF format. [no default value]
   ```
   
-Finally, we can to run the `kinship` module with the above `Stdudy.chr22.indvAF.vcf.gz` as the input, the command is: 
+Finally, we can run the `kinship` module with the above `Stdudy.chr22.indvAF.vcf.gz` as the input, the command is: 
 
   ```
   seekin kinship -i ./Study.chr22.vcf.gz  -a  ./Study.chr22.indvAF.vcf.gz  -r 0.3  -m 0.05   -d DS  -p admix -n 2000  -t 3 -w 1  -o Study.chr22.admix
