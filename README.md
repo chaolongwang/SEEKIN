@@ -1,4 +1,5 @@
 # SEEKIN software
+
 ### Sequence-based Estimation of Kinship and Inbreeding.
 
 #### author: Jinzhuang Dou  <douj@gis.a-star.edu.sg>, Chaolong Wang <wangcl@gis.a-star.edu.sg>
