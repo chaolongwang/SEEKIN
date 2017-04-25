@@ -10,7 +10,7 @@
 -----------------------------------------
 SEEKIN is a software program for estimating kinship and inbreeding coefficients for samples which are sequenced at low sequencing coverage (typically lower than 1x). The key features of this program include:   								
 * Account for the genotype uncertainties by leveraging the haplotype information from studied or external samples.  
-* Hand the genetic data from samples with population structure and admixture.    
+* Handle the genetic data from samples with population structure and admixture.    
 * Analyze thousands of individuals in saving memory usage and computational time by utilizing the "single producer/consumer" design.
 
 ## 2 Requirements
