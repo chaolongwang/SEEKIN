@@ -16,7 +16,7 @@ PROG=       seekin
 INCLUDES=   -I ../lib/libStatGen/include  -I $(ArmadilloPath)/include  -I $(OpenblasPath)/include
 SUBDIRS=    .
 LIBPATH=    -L/lib64 -L/usr/lib64 -L$(ArmadilloPath)/lib64
-LIBS=       -pthread ../lib/libStatGen/libStatGen.a  $(OpenblasPath)/lib/libopenblas.a    /usr/lib64/liblapack.a   /usr/lib64/libblas.a -lgfortran -lz -lm   
+LIBS=       -pthread ../lib/libStatGen/libStatGen.a  $(OpenblasPath)/lib/libopenblas.a   /usr/lib64/liblapack.a   /usr/lib64/libblas.a -lgfortran -lz -lm   
 
 
 
@@ -42,7 +42,7 @@ envTest:
 
 seekin:	envTest $(OBJS)
 		@printf "Linking...                                                \r"
-		@$(CC)   $(CFLAGS) -static -o $(PROG) $(OBJS)  $(LIBPATH) $(LIBS)   $(ENTRAFLAGS) -Xlinker -zmuldefs 
+		@$(CC)   $(CFLAGS)  -static  -o $(PROG) $(OBJS)  $(LIBPATH) $(LIBS)   $(ENTRAFLAGS) -Xlinker -zmuldefs 
 		@printf "$(PROG) compilation done.\n";
 		@$(CC) ./*.o  $(LIBPATH) $(LIBS) $(EXTRA_FLAGS) -o seekin
 		@cp $(PROG) ../bin/
