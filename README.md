@@ -16,27 +16,15 @@ SEEKIN is a software program for estimating kinship and inbreeding coefficients 
 
 ## 2 Requirements
 You will need:
-* a C++ compiler (Support for C++11 containers is required)
+* A C++ compiler (Support for C++11 containers is required)
 * OpenBLAS Libraries
 * Armadillo Linear Algebra Libraries 
 
 ## 3 Download and install
-The download package contains a standalone (i.e., statically linked) 64-bit Linux executable seekin (in the `bin/`), which has already been tested on Linux server. This static executable is recommended because it is well-optimized and no further installation is required. If you want to compile your own version of SEEKIN:
-
-  1. Under the repository name, click to copy the clone URL for the repository. 
-
-  2. Go to the location where you want the cloned directory to be made:  `cd <PathWhereIWantToCloneSEEKIN>`
-
-  3. Type `git clone --recursive`, and then paste the URL you copied in Step 1.
-
-  4. Enter the cloned directory `cd ./src` and type `make` to compile the programs. 
-
-  5. Once make is finished the executables are ready in the folder `<PathWhereIWantToCloneSEEKIN>/SEEKIN/bin/`. Set this path as an  environment variable in the .bashrc file to access executables form everywhere on your proile or call the executables from the path where they are. 
-
-
+The download package contains a standalone (i.e., statically linked) 64-bit Linux executable seekin (in the `bin/`), which has already been tested on Linux server. If you want to compile your own version of SEEKIN, enter the `src/` folder and type `make` to compile the programs. Before that, you will need to change the library paths in the Makefile accordingly.
 
 ## 4 Usage 
-If SEEKIN has been successfully installed into your directory, you can type the following command to get a list of help option.
+You can type the following command to get a list of help option.
 `seekin –h`  
 SEEKIN provides three modules 
 * **modelAF** for calculating the PC-related regression coefficients of reference samples;
@@ -58,10 +46,10 @@ It will generate result files with prefixes `Study.chr22.homo` specified by `–
   ```
   -i Specify the name of the SNP genotype input file of study samples. SEEKIN only reads compressed (gzipped) VCF files. [no default value]
   -a Specify the name of the individual allele frequency file of study samples. SEEKIN only reads compressed (gzipped) VCF files. Note that this option cannot be used for homogenous estimation. [no default value]
-  -r Remove sites with Rsq less than the “-r” value. [default  0.3]  
-  -m Remove sites with MAF less than the “-m” value. [default 0.05]  
-  -d Specify the kinship estimation based on observed or imputed genotypes. It is “GT” if using observed genotypes and “DS” using imputed genotypes. If no DS information is available for a marker in the VCF file, the GT filed will be used even though the option –d is set to DS. If both GT and DS information available, we recommend using DS mode, because our model could account for genotype uncertainty effectively. [default DS]  
-  -p Specify the population mode when estimating kinship. It is “homo” for homogenous estimation and “admix” for admixture estimation.  Note that the option –a must be available when option –p is set to admix. [default  homo]  
+  -r Remove sites with Rsq less than the '-r' value. [default  0.3]  
+  -m Remove sites with MAF less than the '-m' value. [default 0.05]  
+  -d Specify the kinship estimation based on observed or imputed genotypes. It is 'GT' if using observed genotypes and 'DS' using imputed genotypes. If no DS information is available for a marker in the VCF file, the GT filed will be used even though the option –d is set to DS. If both GT and DS information available, we recommend using DS mode, because our model could account for genotype uncertainty effectively. [default DS]  
+  -p Specify the population mode when estimating kinship. It is 'homo' for homogenous estimation and 'admix' for admixture estimation.  Note that the option –a must be available when option –p is set to admix. [default  homo]  
   -n Specify the number of markers to include in each block for kinship calculation at one time. This option must be no more than the total number of markers in the input VCF file. [default 10,000]  
   -t Specify the number of threads of execution. [default 1]  
   -w Specify the weight scheme when combing genome-wide markers. [default 1]  
@@ -112,7 +100,7 @@ All output file will be saved in the current directory unless the path to a diff
 
 * 6.1 _.log and terminal outputs 
 
-The terminal outputs are used to monitor and record the progress for each module when running SEEKIN. It starts with all parameter values used in the execution of SEEKIN, and report the progress of the program step by step. The log file is identical to the terminal outputs. 
+The terminal outputs are used to monitor and record the progress for each module when running SEEKIN. The log file is identical to the terminal outputs. 
 
 * 6.2 _.kin 
 
