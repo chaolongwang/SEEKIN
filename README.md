@@ -15,17 +15,16 @@ SEEKIN is a software program for estimating kinship and inbreeding coefficients 
 * Analyze thousands of individuals in saving memory usage and computational time by utilizing the "single producer/consumer" design.
 
 ## 2 Requirements
-* a C++ compiler (Support for C++11 containers is required)
+You will need:
+* A C++ compiler (Support for C++11 containers is required)
 * OpenBLAS Libraries
 * Armadillo Linear Algebra Libraries 
 
 ## 3 Download and install
-The download package contains a standalone (i.e., statically linked) 64-bit Linux executable seekin (in the `bin/`), which has already been tested on Linux server. If you want to compile your own version of SEEKIN, enter the src/ folder and type `make` to compile the programs. Before that, you will need to modify the library paths in the Makefile accordingly.
-
- 
+The download package contains a standalone (i.e., statically linked) 64-bit Linux executable seekin (in the `bin/`), which has already been tested on Linux server. If you want to compile your own version of SEEKIN, enter the `src/` folder and type `make` to compile the programs. Before that, you will need to change the library paths in the Makefile accordingly.
 
 ## 4 Usage 
-If SEEKIN has been successfully installed into your directory, you can type the following command to get a list of help option.
+You can type the following command to get a list of help option.
 `seekin –h`  
 SEEKIN provides three modules 
 * **modelAF** for calculating the PC-related regression coefficients of reference samples;
@@ -49,8 +48,8 @@ It will generate result files with prefixes `Study.chr22.homo` specified by `–
   -a Specify the name of the individual allele frequency file of study samples. SEEKIN only reads compressed (gzipped) VCF files. Note that this option cannot be used for homogenous estimation. [no default value]
   -r Remove sites with Rsq less than the '-r' value. [default  0.3]  
   -m Remove sites with MAF less than the '-m' value. [default 0.05]  
-  -d Specify the kinship estimation based on observed genotypes or imputed dosages. It is 'GT' if using observed genotypes and 'DS' using imputed dosages. If no DS information is available for a marker in the VCF file, the GT filed will be used even though the option '–d' is set to 'DS'. If both GT and DS information available, the 'DS' will be used since our method could account for genotype uncertainty effectively. [default DS]  
-  -p Specify the population mode when estimating kinship. It is 'homo' for homogenous estimation and 'admix' for heterogenous estimation.  Note that the option –a must be available when option –p is set to admix. [default  homo]  
+  -d Specify the kinship estimation based on observed or imputed genotypes. It is 'GT' if using observed genotypes and 'DS' using imputed genotypes. If no DS information is available for a marker in the VCF file, the GT filed will be used even though the option –d is set to DS. If both GT and DS information available, we recommend using DS mode, because our model could account for genotype uncertainty effectively. [default DS]  
+  -p Specify the population mode when estimating kinship. It is 'homo' for homogenous estimation and 'admix' for admixture estimation.  Note that the option –a must be available when option –p is set to admix. [default  homo]  
   -n Specify the number of markers to include in each block for kinship calculation at one time. This option must be no more than the total number of markers in the input VCF file. [default 10,000]  
   -t Specify the number of threads of execution. [default 1]  
   -w Specify the weight scheme when combing genome-wide markers. 1: 2pqRsq^2; 2: 2Rsq^2 [default 1]  
