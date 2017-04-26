@@ -7,26 +7,36 @@
 #### license: GNU General Public License v3.0 (GPLv3)
 ---
 
-## 1 Overview
+## 1 Description
 -----------------------------------------
 SEEKIN is a software program for estimating kinship and inbreeding coefficients for samples which are sequenced at low sequencing coverage (typically lower than 1x). The key features of this program include:   								
-* Account for the genotype uncertainties by leveraging the haplotype information from studied or external samples.  
+* Account for the genotype uncertainties by leveraging the haplotype information from study or external samples.  
 * Estimate kinship for heterogenous samples with population structure and admixture.    
 * Analyze thousands of individuals in saving memory usage and computational time by utilizing the "single producer/consumer" design.
 
-## 2 Requirements
-You will need:
-* A C++ compiler (Support for C++11 containers is required)
-* OpenBLAS Libraries
-* Armadillo Linear Algebra Libraries 
+## 2 Dependencies
+* gcc >= 4.9
+* OpenBLAS
+* Armadillo
 
 ## 3 Download and install
+
+Clone 
+ 
+`git clone https://github.com/jinzhuangdou/SEEKIN.git`
+
 The download package contains a standalone (i.e., statically linked) 64-bit Linux executable seekin (in the `bin/`), which has already been tested on Linux server. If you want to compile your own version of SEEKIN, enter the `src/` folder and type `make` to compile the programs. Before that, you will need to change the library paths in the Makefile accordingly.
 
-## 4 Usage 
+## 4 Quick start: 
+
+`cd example && bash runSEEKIN.sh`
+
+## 5 Usage 
 You can type the following command to get a list of help option.
 `seekin –h`  
+
 SEEKIN provides three modules 
+
 * **modelAF** for calculating the PC-related regression coefficients of reference samples;
 * **getAF** for estimating the individual allele frequencies of study samples; 
 * **kinship** for estimating kinship coefficients for samples from either homogenous or heterogenous samples.  
@@ -39,6 +49,7 @@ To get the detailed list of option for one module (for example `kinship`), you c
 
 Here we provide example usages based on the data provided in the folder named `example`. In this folder, we have the `Study.chr22.vcf.gz` file which includes genotypes of chromosome 22 for 10 studied samples. You may use the following command:
 The command line for running SEEKIN for homogenous samples is very simple.   
+
   ```./seekin kinship -i ./Study.chr22.vcf.gz  -r 0.3  -m 0.05   -d DS  -p homo  -n 2000  -t 3  -w  1 -o Study.chr22.homo``` 
   
 It will generate result files with prefixes `Study.chr22.homo` specified by `–o` flag in the current directory. The detailed meanings of flags of `kinship` module are summarized below.  
