@@ -21,7 +21,7 @@ PROG=       seekin
 INCLUDES=   -I ../lib/libStatGen/include  -I $(ArmadilloPath)/include  -I $(OpenblasPath)/include
 SUBDIRS=    .
 LIBPATH=    -L/lib64 -L/usr/lib64 -L$(ArmadilloPath)/lib64
-LIBS=       -pthread ../lib/libStatGen/libStatGen.a  $(OpenblasPath)/lib/libopenblas.a -lgfortran -lz -lm   
+LIBS=       -pthread ../lib/libStatGen.a  $(OpenblasPath)/lib/libopenblas.a -lgfortran -lz -lm   
 
 
 
@@ -39,7 +39,8 @@ endif
 
 all:	seekin
 
-
+modules:
+		git submodule update --init --recursive 
 envTest:
 		@test $(BIT_ERR) != 1 || sh -c 'echo "Fatal: 64bit CPU and Operating System required!";false;'
 		@test $(GCCVERSIONMAJOR) == 1 || sh -c 'echo "GCC version lower than 4.4.0";false;'
