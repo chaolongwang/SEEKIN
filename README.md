@@ -21,11 +21,11 @@ SEEKIN is a software program for estimating kinship and inbreeding coefficients 
 
 ## 3 Download and install
 
-Clone 
- 
-`git clone https://github.com/jinzhuangdou/SEEKIN.git`
+`git clone https://github.com/jinzhuangdou/SEEKIN.git 
 
 The download package contains a standalone (i.e., statically linked) 64-bit Linux executable seekin (in the `bin/`), which has already been tested on Linux server. If you want to compile your own version of SEEKIN, enter the `src/` folder and type `make` to compile the programs. Before that, you will need to change the library paths in the Makefile accordingly.
+
+`cd SEEKIN/src && make`
 
 ## 4 Quick start: 
 
