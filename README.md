@@ -21,7 +21,7 @@ SEEKIN is a software program for estimating kinship and inbreeding coefficients 
 
 ## 3 Download and install
 
-`git clone https://github.com/jinzhuangdou/SEEKIN.git 
+`git clone https://github.com/jinzhuangdou/SEEKIN.git` 
 
 The download package contains a standalone (i.e., statically linked) 64-bit Linux executable seekin (in the `bin/`), which has already been tested on Linux server. If you want to compile your own version of SEEKIN, enter the `src/` folder and type `make` to compile the programs. Before that, you will need to change the library paths in the Makefile accordingly.
 
@@ -43,9 +43,9 @@ SEEKIN provides three modules
 
 To get the detailed list of option for one module (for example `kinship`), you can type: `seekin kinship –h`  
 
-## 5 Examples
+## 6 Examples
 
-* 5.1 Kinship estimation for homogenous samples
+* 6.1 Kinship estimation for homogenous samples
 
 Here we provide example usages based on the data provided in the folder named `example`. In this folder, we have the `Study.chr22.vcf.gz` file which includes genotypes of chromosome 22 for 10 studied samples. You may use the following command:
 The command line for running SEEKIN for homogenous samples is very simple.   
@@ -67,7 +67,7 @@ It will generate result files with prefixes `Study.chr22.homo` specified by `–
   -o Specify the output file name prefix. The prefix may be an absolute or relative filename, but it cannot be a directory name.  
   ```
   
-* 5.2 Kinship estimation of samples with population structure and admixture 
+* 6.2 Kinship estimation of samples with population structure and admixture 
 
 Except for the genotype files, we also have two PCA coordinate files in a plain text format: 1) `SGVP_268.chr22.RefPC.coord` file which contains PCA coordinates for the top 2 PCs of the reference individuals; 2) `Study.chr22.ProPC.coord` file which contains the top 2 PCs calculated by projecting the study samples on the reference panel using LASER.  In this example, we use the SGVP as reference panel to model the PC-related linear regression coefficients based on the ```modelAF``` module:
 
@@ -106,14 +106,14 @@ Finally, we can run the `kinship` module with the above `Stdudy.chr22.indvAF.vcf
 The command is similar with the homogenous case but requiring the estimated individual allele frequency file specified by the flag `–a` and using the `admix` mode specified by flag `–p`. 
 
 
-## 6 Output
+## 7 Output
 All output file will be saved in the current directory unless the path to a different directory given in the parameter value. We first describe the 5 output files from the kinship module which will be start with the prefix specified by the `-o` value.
 
-* 6.1 _.log and terminal outputs 
+* 7.1 _.log and terminal outputs 
 
 The terminal outputs are used to monitor and record the progress for each module when running SEEKIN. The log file is identical to the terminal outputs. 
 
-* 6.2 _.kin 
+* 7.2 _.kin 
 
 This file provides the kinship estimation for all pairs of individuals. The first line is the header line. The first two columns correspond to the individual ID for the first and second individual of pair. The third column denotes the number of SNPs used for kinship estimation, and the fourth column represents the estimated kinship coefficient. One example is as following: 
   ```
@@ -123,7 +123,7 @@ This file provides the kinship estimation for all pairs of individuals. The firs
   S1      S4      8592    0.0168      
   ```
   
-* 6.3 _.inbreed 
+* 7.3 _.inbreed 
 
 This file provides the estimation of inbreeding coefficient estimation for each individual. The columns are individual ID and inbreeding coefficient, respectively. One example is as following:
   ```
@@ -133,11 +133,11 @@ This file provides the estimation of inbreeding coefficient estimation for each 
   S3      -0.0338
   ```
   
-* 6.4 _.index and _.matrix 
+* 7.4 _.index and _.matrix 
 
 The `_.matrix` file contains an N × N matrix (The variable N here means the sample size of study samples) of estimated kinship coefficients with the corresponding index of each individual shown in `_.index` file.  For example, the kinship coefficient value given in row 2 and column 3 in the `_.matrix` file would correspond to the individuals in the `_.index` file who have indices of 2 and 3, respectively.
 
-* 6.5 PC-related regression coefficient file of reference samples    
+* 7.5 PC-related regression coefficient file of reference samples    
 
 Use the `modelAF` module in SEEKIN, you will generate the file which contains the PC-related regression coefficients for reference samples. The first line is a header line. From the first column to the fifth column are chromosome ID, genome position, reference allele, alternative reference allele, and allele frequencies of non-ref allele, respectively. And the remaining columns are the estimated coefficients for each PC. This file is tab-delimited. An example is as following: 
   ```
@@ -146,7 +146,7 @@ Use the `modelAF` module in SEEKIN, you will generate the file which contains th
   10     70969    G       A        0.41     0.96    -0.10    
   ```
   
-* 6.6 Individual allele frequency file of study samples  
+* 7.6 Individual allele frequency file of study samples  
 
 Use the `getAF` module in SEEKIN, you will generate the file which contains the individual allele frequencies for study samples. The generated file is the standard VCF in the compressed format as following: 
   ```
@@ -159,7 +159,7 @@ Use the `getAF` module in SEEKIN, you will generate the file which contains the 
   1       13102   .       C       T       .       .       AF=0.4500       AF1     0.2514  0.0123  0.0216
   1       14052   .       C       G       .       .       AF=0.6500       AF1     0.0524  0.0252  0.9531
   ```
-## 7 Reference
+## 8 Reference
 
 ```
 1. Browning, B.L. & Browning, S.R. A unified approach to genotype imputation and haplotype-phase inference for large data sets of trios and unrelated individuals. Am J Hum Genet 84, 210-23 (2009).
