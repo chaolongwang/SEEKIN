@@ -115,7 +115,7 @@ The terminal outputs are used to monitor and record the progress for each module
 
 * 7.2 _.kin 
 
-This file provides the kinship estimation for all pairs of individuals. The first line is the header line. The first two columns correspond to the individual ID for the first and second individual of pair. The third column denotes the number of SNPs used for kinship estimation, and the fourth column represents the estimated kinship coefficient. One example is as following: 
+This file provides the kinship estimation for all pairs of individuals.The columns are individual ID for the first and second individual of pair, number of SNPs used, the estimated kinship coefficient, respectively. One example is as following: 
   ```
   Ind1    Ind2    NSNP    Kinship      
   S1      S2      8592    0.0231     
@@ -139,7 +139,7 @@ The `_.matrix` file contains an N × N matrix (The variable N here means the sam
 
 * 7.5 PC-related regression coefficient file of reference samples    
 
-Use the `modelAF` module in SEEKIN, you will generate the file which contains the PC-related regression coefficients for reference samples. The first line is a header line. From the first column to the fifth column are chromosome ID, genome position, reference allele, alternative reference allele, and allele frequencies of non-ref allele, respectively. And the remaining columns are the estimated coefficients for each PC. This file is tab-delimited. An example is as following: 
+Use the `modelAF` module in SEEKIN, you will generate the file which contains the PC-related regression coefficients for reference samples. From the first column to the fifth column are chromosome ID, genome position, reference allele, alternative reference allele, and allele frequencies of non-ref allele, respectively. And the remaining columns are the estimated coefficients for each PC. This file is tab-delimited. An example is as following: 
   ```
   CHROM   POS     REF     ALT      AF       beta0   beta1   
   10     60969    C       A        0.48     0.96    -0.00    
