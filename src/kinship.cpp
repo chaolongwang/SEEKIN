@@ -537,18 +537,24 @@ static void checkHeader(int af_indiv_sampleNum, int gp_sampleNum, map<int,int> &
 }
 
 bool  display_usage(){
-    fprintf ( stderr, "\nBasic usage: seekin kinship <command> [option] \n" );
-    fprintf ( stderr, "  -i <str>     the input VCF file of studied samples (required)\n" );
-    fprintf ( stderr, "  -o <str>     the prefix of output files \n" );
-    fprintf ( stderr, "  -p <str>     the population structure mode: homo or admix (required)\n" );
-    fprintf ( stderr, "  -w <int>     weighted function used to average all markers, 1: 2pqr^4; 2 2r^4 [1]\n" );
-    fprintf ( stderr, "  -d <str>     use genotype or dosage GT or DS, [DS] \n" );
-    fprintf ( stderr, "  -a <str>     the individual specific allele frequency file (required for admixture)\n");
-    fprintf ( stderr, "  -r <float>   imputation dosage r2 filter [0.5] \n" );
-    fprintf ( stderr, "  -m <float>   minor allele frequency filter [0.05] \n" );
-    fprintf ( stderr, "  -n <int>     the number of SNPs per block [10,000]\n" );
-    fprintf ( stderr, "  -t <int>     the number of threads [1]\n" );
-    fprintf ( stderr, "  -h <>        help information\n\n" );
+
+    cout << R"(
+seekin kinship 
+      -i  The genotype file of study samples (compressed gzipped VCF files). [no default value]
+      -a  The individual allele frequency file of study samples (compressed gzipped VCF files). [no default value]
+      -r  Remove sites with Rsq less than the -r value. [default  0.3]  
+      -m  Remove sites with MAF less than the -m value. [default 0.05]  
+      -d  Kinship estimation based on observed genotypes or dosages. GT: the observed genotypes; 
+          DS:dosages. [default DS] 
+      -p  Population mode. homo: homogenous samples; admix: heterogenous samples. [default homo]  
+      -n  Number of markers to include per block. [default 10,000]  
+      -t  Number of threads of execution. [default 1]  
+      -w  Weight scheme when combing genome-wide markers. 1: 2pqRsq^2; 2: 2Rsq^2. [default 1]  
+      -o  Output file name prefix. 
+
+    Note: the options –a and -p cannot be used for homogenous estimation. 
+      
+)";
     return (true);
 }
 

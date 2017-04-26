@@ -76,10 +76,14 @@ static void pipeline ( int argc, char ** argv )
 
 bool seekin_display_usage ()
 {
-	fprintf ( stderr, "\nUsage: seekin <command> [option]\n" );
-	fprintf ( stderr, "    modelAF	Model allele frequencies as a linear function of PCs\n" );
-	fprintf ( stderr, "    getAF	Estimate individual-specific allele frequencies\n");
-	fprintf ( stderr, "    kinship	Estimate kinship and inbreeding coefficients\n");
+	cout << R"(
+Usage: seekin <command> [option]
+		
+	modelAF	 Model PC-related regression coefficients of reference samples
+	getAF	 Estimate individual  allele frequencies of study samples
+	kinship	 Estimate kinship and inbreeding coefficients of study samples
+
+)";
 }
 
 

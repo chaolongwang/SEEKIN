@@ -55,10 +55,8 @@ int getAF(int argc, char ** argv){
 
     // check the input parameters and set default values. 
     initenv (argc, argv);
-    cout << "OK\n";
     // check the run mode
     paraCheck();
-    cout << "OK\n";
     // estimate the PC-related coefficients 
     getPCrelateAF();
 }
@@ -190,12 +188,15 @@ static void getPCrelateAF(){
 
 
 bool  getAF_display_usage(){
-	fprintf ( stderr, "\nBasic usage: seekin getAF <command> [option]\n" );
-	fprintf ( stderr, "  -i <str>     the studied samples' coordinate file (required)\n" );
-	fprintf ( stderr, "  -b <str>     the input PC-related coefficient file (required) \n" );
-	fprintf ( stderr, "  -o <str>     the output individual-specific allele frequency file (required) \n");
-	fprintf ( stderr, "  -k <int>     number of PCs to compute (must be a positive integer; default 20) \n");
-	fprintf ( stderr, "  -h <>        help information\n\n" );
+
+	cout << R"(
+seekin getAF
+	-i  The PCA coordinate file of study samples. [no default value] 
+  	-b  The PC-related regression coefficient file of reference samples. [no default value]
+  	-k  The number of PCs to compute. [default 2]. 
+  	-o  The output file name. No need to add the .gz suffix. [no default value]
+
+)";
 	return (true);
 }
 

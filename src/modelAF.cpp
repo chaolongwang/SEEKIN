@@ -221,12 +221,15 @@ static void getPCrelate(){
 //*****************************************
 
 bool  modelAF_display_usage(){
-	fprintf ( stderr, "\nBasic usage: seekin modelAF  <command> [option]\n" );
-	fprintf ( stderr, "  -i <str>     the input reference VCF file (required)\n" );
-	fprintf ( stderr, "  -c <str>     the input reference coordinate file (required) \n" );
-	fprintf ( stderr, "  -o <str>     the output PC-related coefficient file (required) \n");
-	fprintf ( stderr, "  -k <int>     number of PCs to compute (must be a positive integer; default 20) \n");
-	fprintf ( stderr, "  -h <>        help information\n\n" );
+
+	cout << R"(
+seekin modelAF
+	  -i  The genotype file of reference samples (compressed gzipped VCF files). [no default value] 
+	  -c  The PCA coordinate file of reference samples. [no default value]
+	  -k  The number of PCs to compute. [default 2]. 
+	  -o  The output file name. [no default value]
+
+)";
 	return (true);
 }
 
