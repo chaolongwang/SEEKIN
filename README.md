@@ -27,7 +27,7 @@ The download package contains a standalone (i.e., statically linked) 64-bit Linu
 
 `cd SEEKIN/src && make`
 
-## 4 Quick start: 
+## 4 Quick start 
 
 `cd example && bash runSEEKIN.sh`
 
