@@ -9,7 +9,7 @@
 
 ## 1 Description
 
-SEEKIN is a software program for estimating kinship and inbreeding coefficients for samples which are sequenced at low sequencing coverage (typically lower than 1x). The key features of this program include:   								
+SEEKIN is a software program for estimating kinship coefficients for samples which are sequenced at low sequencing coverage (typically lower than 1x). The key features of this program include:   								
 * Account for the genotype uncertainties by leveraging the haplotype information from study or external samples.  
 * Estimate kinship for heterogenous samples with population structure and admixture.    
 * Analyze thousands of individuals in saving memory usage and computational time by utilizing the "single producer/consumer" design. 
@@ -29,7 +29,7 @@ The download package contains a standalone (i.e., statically linked) 64-bit Linu
 
 `cd SEEKIN/src && make`
 
-## 4 Quick start: 
+## 4 Quick start 
 
 `cd example && bash runSEEKIN.sh`
 
@@ -90,7 +90,7 @@ Using the `SGVP268.beta` file generated above, you may use the following command
   seekin getAF –i Study.chr22.ProPC.coord -b  SGVP_268.chr22.beta  -k 2 –o Study.chr22.indvAF.vcf
   ```
   
-In the above command, the `Study.chr22.ProPC.coord` file is the projected PCA coordinate file of the study samples on the reference panel, and we recommend the users to read the LASER documentation[2] carefully for more information. The detailed meanings of flags of `getAF` module are summarized below. 
+In the above command, the `Study.chr22.ProPC.coord` file is the projected PCA coordinate file of the study samples on the reference panel, and we recommend the users to read the LASER documentation carefully for more information. The detailed meanings of flags of `getAF` module are summarized below. 
 
   ```
   -i Specify the PCA coordinate file of study samples. [no default value] 
@@ -161,13 +161,3 @@ Use the `getAF` module in SEEKIN, you will generate the file which contains the 
   1       13102   .       C       T       .       .       AF=0.4500       AF1     0.2514  0.0123  0.0216
   1       14052   .       C       G       .       .       AF=0.6500       AF1     0.0524  0.0252  0.9531
   ```
-## 8 Reference
-
-```
-1. Browning, B.L. & Browning, S.R. A unified approach to genotype imputation and haplotype-phase inference for large data sets of trios and unrelated individuals. Am J Hum Genet 84, 210-23 (2009).
-2. Wang, C. et al. Ancestry estimation and control of population stratification for sequence-based association studies. Nat Genet 46, 409-15 (2014).
-3. Teo, Y.Y. et al. Singapore Genome Variation Project: a haplotype map of three Southeast Asian populations. Genome Res 19, 2154-62 (2009).
-4. Sudmant, P.H. et al. An integrated map of structural variation in 2,504 human genomes. Nature 526, 75-81 (2015).
-5. International HapMap, C. A haplotype map of the human genome. Nature 437, 1299-320 (2005).
-6. Conomos, M.P., Reiner, A.P., Weir, B.S. & Thornton, T.A. Model-free Estimation of Recent Genetic Relatedness. Am J Hum Genet 98, 127-48 (2016).
-```
