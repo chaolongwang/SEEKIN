@@ -49,7 +49,7 @@ To get the detailed meaning of option for one module (for example `kinship`), yo
 Here we provide example usages based on the data provided in the folder named `example`. In this folder, we have the `Study.chr22.vcf.gz` file which includes genotypes of chromosome 22 for 10 studied samples. The genotypes are called from shallow sequencing reads (~0.75x) and then phased using Beagle (V4.0) software [1] with 1000 Genomes Project Phase 3 (1KG3) as the external reference panel. Another VCF file is the SGVP_268.chr22.vcf.gz file that includes the genotypes at 18,659 SNP loci on chromosome 22 for 268 reference samples from Singapore Genome Variation Project (SGVP). There also include two PCA coordinate files in a plain text format: 1) SGVP_268.chr22.RefPC.coord file which contains PCA coordinates for the top 2 PCs of the reference individuals; 2) Study.chr22.ProPC.coord file which contains the top 2 PCs calculated by projecting the study samples on the reference panel using LASER [2]. These two PCA coordinate files plus the SGVP_268.chr22.vcf.gz are required for SEEKIN to estimate the individual allele frequencies if there is population structure/admixture for samples analyzed available.  
 
 
-* 6.1 Kinship estimation for homogenous samples
+** 6.1 Kinship estimation for homogenous samples**
 
 Only the genotype file of study samples is required when estimating kinship for homogenous samples.   
 
@@ -86,7 +86,7 @@ This file provides the estimation of inbreeding coefficient estimation for each 
 
 The `_.matrix` file contains an N × N matrix (The variable N here means the sample size of study samples) of estimated kinship coefficients with the corresponding index of each individual shown in `_.index` file.  For example, the kinship coefficient value given in row 2 and column 3 in the `_.matrix` file would correspond to the individuals in the `_.index` file who have indices of 2 and 3, respectively.
 
-* 6.2 Kinship estimation of samples with population structure and admixture 
+** 6.2 Kinship estimation of samples with population structure and admixture** 
 
 We first use the SGVP as reference panel to model the PC-related linear regression coefficients based on the ```modelAF``` module:
 
