@@ -2,9 +2,9 @@
 
 ### Sequence-based Estimation of Kinship.
 
-#### author: Jinzhuang Dou  <douj@gis.a-star.edu.sg>, Chaolong Wang <wangcl@gis.a-star.edu.sg>
+#### Author: Jinzhuang Dou  <douj@gis.a-star.edu.sg>, Chaolong Wang <wangcl@gis.a-star.edu.sg>
 
-#### license: GNU General Public License v3.0 (GPLv3)
+#### License: GNU General Public License v3.0 (GPLv3)
 ---
 
 ## 1 Description
@@ -44,17 +44,17 @@ SEEKIN provides three modules
 
 To get the detailed meaning of option for one module (for example `kinship`), you can type: `seekin kinship –h`  
 
-## 6 Examples
+## 5 Examples
 
 Here we provide example usages based on the data provided in the folder named `example`. This folder includes two genotype files in the standard VCF compressed format and two PCA coordinate file in the plain text format. 
 
 * **Study.chr22.vcf.gz**  This file includes genotypes of chromosome 22 for 10 studied samples which are called from shallow sequencing reads (~0.75x) and then phased using Beagle (V4.0) software [1] with 1000 Genomes Project Phase 3 (1KG3) as the external reference panel. 
-* **SGVP_268.chr22.vcf.gz**  This file includes the genotypes at 18,659 SNP loci on chromosome 22 for 268 reference samples from Singapore Genome Variation Project (SGVP). 
+* **SGVP_268.chr22.vcf.gz**  This file includes the genotypes of chromosome 22 for 268 reference samples from Singapore Genome Variation Project (SGVP). 
 * **SGVP_268.chr22.RefPC.coord** This file contains PCA coordinates for the top 2 PCs of the reference individuals.
 * **Study.chr22.ProPC.coord**  This file contains the top 2 PCs calculated by projecting the study samples on the SGVP panel using LASER [2]. 
 
   
-#### 6.1 Kinship estimation for homogenous samples
+#### 5.1 Kinship estimation for homogenous samples
 
 Only the genotype file of study samples is required when estimating kinship for homogenous samples.   
 
@@ -91,7 +91,7 @@ This file provides the estimation of inbreeding coefficient estimation for each 
 
 The `_.matrix` file contains an N × N matrix (The variable N here means the sample size of study samples) of estimated kinship coefficients with the corresponding index of each individual shown in `_.index` file.  For example, the kinship coefficient value given in row 2 and column 3 in the `_.matrix` file would correspond to the individuals in the `_.index` file who have indices of 2 and 3, respectively.
 
-#### 6.2 Kinship estimation of samples with population structure and admixture
+#### 5.2 Kinship estimation of samples with population structure and admixture
 
 We first use the SGVP as reference panel to model the PC-related linear regression coefficients based on the ```modelAF``` module:
 
@@ -133,7 +133,7 @@ Finally, we can run the `kinship` module with the above `Stdudy.chr22.indvAF.vcf
  The generated output files have the same format with those from the homogenous setting. 
 
 
-## 7 Reference
+## 6 Reference
 
 1.  Browning, B.L. & Browning, S.R. A unified approach to genotype imputation and haplotype-phase inference for large data sets of trios and unrelated individuals. Am J Hum Genet 84, 210-23 (2009).
 2.  Wang, C. et al. Ancestry estimation and control of population stratification for sequence-based association studies. Nat Genet 46, 409-15 (2014).
