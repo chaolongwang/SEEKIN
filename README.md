@@ -46,16 +46,14 @@ To get the detailed meaning of option for one module (for example `kinship`), yo
 
 ## 6 Examples
 
-Here we provide example usages based on the data provided in the folder named `example`. In this folder, we have two genotype files in the compressed format.  
+Here we provide example usages based on the data provided in the folder named `example`. This folder includes two genotype files in the standard VCF compressed format and two PCA coordinate file in the plain text format. 
 
 * **Study.chr22.vcf.gz**  This file includes genotypes of chromosome 22 for 10 studied samples which are called from shallow sequencing reads (~0.75x) and then phased using Beagle (V4.0) software [1] with 1000 Genomes Project Phase 3 (1KG3) as the external reference panel. 
 * **SGVP_268.chr22.vcf.gz**  This file includes the genotypes at 18,659 SNP loci on chromosome 22 for 268 reference samples from Singapore Genome Variation Project (SGVP). 
 * **SGVP_268.chr22.RefPC.coord** This file contains PCA coordinates for the top 2 PCs of the reference individuals.
 * **Study.chr22.ProPC.coord**  This file contains the top 2 PCs calculated by projecting the study samples on the reference panel using LASER [2]. 
 
-These two PCA coordinate files plus the SGVP_268.chr22.vcf.gz are required for SEEKIN to estimate the individual allele frequencies if there is population structure/admixture for samples analyzed available.  
-
-
+  
 #### 6.1 Kinship estimation for homogenous samples
 
 Only the genotype file of study samples is required when estimating kinship for homogenous samples.   
