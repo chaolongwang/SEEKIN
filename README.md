@@ -33,7 +33,7 @@ The download package contains a standalone (i.e., statically linked) 64-bit Linu
 `cd SEEKIN/src && make`
 
 ## 4 Usage 
-You can type the following command to get a list of help option.
+You can type the following command to get the list of help option.
 `seekin –h`  
 
 SEEKIN provides three modules 
@@ -130,7 +130,7 @@ Finally, we can run the `kinship` module with the above `Stdudy.chr22.indvAF.vcf
   seekin kinship -i ./Study.chr22.vcf.gz  -a  ./Study.chr22.indvAF.vcf.gz  -r 0.3  -m 0.05   -d DS  -p admix -n 2000  -t 3 -w 1  -o Study.chr22.admix
   ```
   
- The generated output files have the same format with those from homogenous setting. 
+ The generated output files have the same format with those from the homogenous setting. 
 
 
 ## 7 Reference
