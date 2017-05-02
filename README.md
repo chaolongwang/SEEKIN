@@ -51,7 +51,7 @@ Here we provide example usages based on the data provided in the folder named `e
 * **Study.chr22.vcf.gz**  This file includes genotypes of chromosome 22 for 10 studied samples which are called from shallow sequencing reads (~0.75x) and then phased using Beagle (V4.0) software [1] with 1000 Genomes Project Phase 3 (1KG3) as the external reference panel. 
 * **SGVP_268.chr22.vcf.gz**  This file includes the genotypes at 18,659 SNP loci on chromosome 22 for 268 reference samples from Singapore Genome Variation Project (SGVP). 
 * **SGVP_268.chr22.RefPC.coord** This file contains PCA coordinates for the top 2 PCs of the reference individuals.
-* **Study.chr22.ProPC.coord**  This file contains the top 2 PCs calculated by projecting the study samples on the reference panel using LASER [2]. 
+* **Study.chr22.ProPC.coord**  This file contains the top 2 PCs calculated by projecting the study samples on the SGVP panel using LASER [2]. 
 
   
 #### 6.1 Kinship estimation for homogenous samples
