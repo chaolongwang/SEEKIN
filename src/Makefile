@@ -8,12 +8,15 @@ ArmadilloPath = /mnt/projects/wangcl/ancestry/usr
 
 OpenblasPath =  /mnt/projects/wangcl/ancestry/usr/opt/OpenBLAS
 ## Change $(OpenblasPath) if OpenblasPath were installed in a different directory
+
+OpenblasLibPath =  /mnt/projects/wangcl/ancestry/usr/opt/OpenBLAS/lib
+## Change $(OpenblasLibPath) if OpenblasPath were installed in a different directory
 ##################################
 
 
 
-GCCVERSIONMAJOR := $(shell expr `$(CC) -dumpversion | cut -f1 -d.` \>= 4)
-GCCVERSIONMINOR := $(shell expr `$(CC) -dumpversion | cut -f2 -d.` \>= 9)
+GCCVERSIONMAJOR := $(shell expr `$(CC) -dumpversion | cut -f1-2 -d.` \>= 4.9) 
+
 CFLAGS=         -g -O0 -std=c++11 -pipe 
         
 OBJS=		getAF.o  modelAF.o  kinship.o seekin.o 
@@ -21,7 +24,7 @@ PROG=       seekin
 INCLUDES=   -I ../lib/libStatGen/include  -I $(ArmadilloPath)/include  -I $(OpenblasPath)/include
 SUBDIRS=    .
 LIBPATH=    -L/lib64 -L/usr/lib64 -L$(ArmadilloPath)/lib64
-LIBS=       -pthread ../lib/libStatGen.a  $(OpenblasPath)/lib/libopenblas.a -lgfortran -lz -lm   
+LIBS=       -pthread ../lib/libStatGen.a  $(OpenblasLibPath)/libopenblas.a -lgfortran -lz -lm   
 
 
 
@@ -43,14 +46,13 @@ modules:
 		git submodule update --init --recursive 
 envTest:
 		@test $(BIT_ERR) != 1 || sh -c 'echo "Fatal: 64bit CPU and Operating System required!";false;'
-		@test $(GCCVERSIONMAJOR) == 1 || sh -c 'echo "GCC version lower than 4.4.0";false;'
-		@test $(GCCVERSIONMINOR) == 1 || sh -c 'echo "GCC version lower than 4.4.0";false;'
+		@test $(GCCVERSIONMAJOR) == 1 || sh -c 'echo "GCC version lower than 4.9.0";false;'
 
 seekin:	envTest $(OBJS)
 		@printf "Linking...                                                \r"
 		@$(CC)   $(CFLAGS)  -static  -o $(PROG) $(OBJS)  $(LIBPATH) $(LIBS)   $(ENTRAFLAGS) -Xlinker -zmuldefs 
 		@printf "$(PROG) compilation done.\n";
-		@$(CC) ./*.o  $(LIBPATH) $(LIBS) $(EXTRA_FLAGS) -o ../bin/seekin
+		@$(CC)  ./*.o  $(LIBPATH) $(LIBS) $(EXTRA_FLAGS) -o ../bin/seekin
 		@cp $(PROG) ../bin/
 
 clean:
