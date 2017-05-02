@@ -1,6 +1,6 @@
 # SEEKIN software
 
-### Sequence-based Estimation of Kinship and Inbreeding.
+### Sequence-based Estimation of Kinship.
 
 #### author: Jinzhuang Dou  <douj@gis.a-star.edu.sg>, Chaolong Wang <wangcl@gis.a-star.edu.sg>
 
@@ -12,7 +12,9 @@
 SEEKIN is a software program for estimating kinship and inbreeding coefficients for samples which are sequenced at low sequencing coverage (typically lower than 1x). The key features of this program include:   								
 * Account for the genotype uncertainties by leveraging the haplotype information from study or external samples.  
 * Estimate kinship for heterogenous samples with population structure and admixture.    
-* Analyze thousands of individuals in saving memory usage and computational time by utilizing the "single producer/consumer" design.
+* Analyze thousands of individuals in saving memory usage and computational time by utilizing the "single producer/consumer" design. 
+
+If you have any bug reports or questions please send an email to Jinzhuang Dou at douj@gis.a-star.edu.sg or Chaolong Wang at wangcl@gis.a-star.edu.sg
 
 ## 2 Dependencies
 * gcc >= 4.9
