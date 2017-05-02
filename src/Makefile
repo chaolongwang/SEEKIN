@@ -1,7 +1,7 @@
 
 ####################################
-CC=/opt/gcc-4.9.3/bin/g++ 
-## Change $(CC)
+CXX=/opt/gcc-4.9.3/bin/g++ 
+## Change $(CXX)
 
 ArmadilloPath = /mnt/projects/wangcl/ancestry/usr
 ## Change $(ArmadilloPath) if Armadillo were installed in a different directory
@@ -15,7 +15,7 @@ OpenblasLibPath =  /mnt/projects/wangcl/ancestry/usr/opt/OpenBLAS/lib
 
 
 
-GCCVERSIONMAJOR := $(shell expr `$(CC) -dumpversion | cut -f1-2 -d.` \>= 4.9) 
+GCCVERSIONMAJOR := $(shell expr `$(CXX) -dumpversion | cut -f1-2 -d.` \>= 4.9) 
 
 CFLAGS=         -g -O0 -std=c++11 -pipe 
         
@@ -37,7 +37,7 @@ endif
 
 .cpp.o:
 		@printf "Compiling $<...                             \r"; \
-		$(CC) -c $(CFLAGS) $(DFLAGS) $(INCLUDES) $< || echo "Error in command: $(CC) -c $(CFLAGS) $(DFLAGS) $(INCLUDES) $<"
+		$(CXX) -c $(CFLAGS) $(DFLAGS) $(INCLUDES) $< || echo "Error in command: $(CXX) -c $(CFLAGS) $(DFLAGS) $(INCLUDES) $<"
 
 
 all:	seekin
@@ -50,9 +50,9 @@ envTest:
 
 seekin:	envTest $(OBJS)
 		@printf "Linking...                                                \r"
-		@$(CC)   $(CFLAGS)  -static  -o $(PROG) $(OBJS)  $(LIBPATH) $(LIBS)   $(ENTRAFLAGS) -Xlinker -zmuldefs 
+		@$(CXX)   $(CFLAGS)  -static  -o $(PROG) $(OBJS)  $(LIBPATH) $(LIBS)   $(ENTRAFLAGS) -Xlinker -zmuldefs 
 		@printf "$(PROG) compilation done.\n";
-		@$(CC)  ./*.o  $(LIBPATH) $(LIBS) $(EXTRA_FLAGS) -o ../bin/seekin
+		@$(CXX)  ./*.o  $(LIBPATH) $(LIBS) $(EXTRA_FLAGS) -o ../bin/seekin
 		@cp $(PROG) ../bin/
 
 clean:
