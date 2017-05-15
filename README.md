@@ -8,7 +8,7 @@
 ---
 
 ## 1 Description
-SEEKIN is a software program for estimating pairwise kinship coefficients using either shallow sequencing data or genotyping data. The method was initially developed for shallow sequencing data, such as off-target sequencing data from target sequencing experiments (typically ~0.1-1X). SEEKIN, together with the LASER (use URL here) software [1] for ancestry estimation, enables control of population structure and cryptic relatedness in target/exome sequencing studies.
+SEEKIN is a software program for estimating pairwise kinship coefficients using either shallow sequencing data or genotyping data. The method was initially developed for shallow sequencing data, such as off-target sequencing data from target sequencing experiments (typically ~0.1-1X). SEEKIN, together with the [LASER] (http://csg.sph.umich.edu/chaolong/LASER/ "悬停显示") software [1] for ancestry estimation, enables control of population structure and cryptic relatedness in target/exome sequencing studies.
  
 To address the missing data and genotype uncertainty issues that are intrinsic to shallow sequencing data, we use the LD-based genotype calling algorithm in BEAGLE (use URL here) [2] to process sequencing data and develop kinship estimators that explicitly model the genotype uncertainty via the Rsq metric output by BEAGLE.
 
@@ -160,4 +160,6 @@ The output files have the same format as those described in section 6.1.
 
 1.  Browning, B.L. & Browning, S.R. A unified approach to genotype imputation and haplotype-phase inference for large data sets of trios and unrelated individuals. Am J Hum Genet 84, 210-23 (2009).
 2.  Wang, C. et al. Ancestry estimation and control of population stratification for sequence-based association studies. Nat Genet 46, 409-15 (2014)
-3. 
+3.  Wang, C. et al. Improved ancestry estimation for both genotyping and sequencing data using projection procrustes analysis and genotype imputation. Am J Hum Genet 96, 926-937 (2015).
+4.  Thornton, T. et al. Estimating kinship in admixed populations. Am J Hum Genet 91, 122-138 (2012).
+5.  Conomos, M.P. et al. Model-free estimation of recent genetic relatedness. Am J Hum Genet 98, 127-148 (2016).
