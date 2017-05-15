@@ -8,9 +8,9 @@
 ---
 
 ## 1 Description
-SEEKIN is a software program for estimating pairwise kinship coefficients using either shallow sequencing data or genotyping data. The method was initially developed for shallow sequencing data, such as off-target sequencing data from target sequencing experiments (typically ~0.1-1X). SEEKIN, together with the [LASER] [我的博客] (http://csg.sph.umich.edu/chaolong/LASER/) software [1,2] for ancestry estimation, enables control of population structure and cryptic relatedness in target/exome sequencing studies.
+SEEKIN is a software program for estimating pairwise kinship coefficients using either shallow sequencing data or genotyping data. The method was initially developed for shallow sequencing data, such as off-target sequencing data from target sequencing experiments (typically ~0.1-1X). SEEKIN, together with the [LASER](http://csg.sph.umich.edu/chaolong/LASER/) software [1,2] for ancestry estimation, enables control of population structure and cryptic relatedness in target/exome sequencing studies.
  
-To address the missing data and genotype uncertainty issues that are intrinsic to shallow sequencing data, we use the LD-based genotype calling algorithm in BEAGLE [3] (https://faculty.washington.edu/browning/beagle/beagle.html) to process sequencing data and develop kinship estimators that explicitly model the genotype uncertainty via the Rsq metric output by BEAGLE.
+To address the missing data and genotype uncertainty issues that are intrinsic to shallow sequencing data, we use the LD-based genotype calling algorithm in [BEAGLE](https://faculty.washington.edu/browning/beagle/beagle.html)[3] to process sequencing data and develop kinship estimators that explicitly model the genotype uncertainty via the Rsq metric output by BEAGLE.
 
 SEEKIN includes a homogeneous estimator for samples from the sample population (SEEKIN-hom) and a heterogeneous estimator for samples with population structure and admixture (SEEKIN-het). For SEEKIN-het, we use the LASER program to estimate individual ancestry for each study individual, and then derive individual-specific allele frequencies for kinship estimation in a way similar to existing methods [4,5].
 
