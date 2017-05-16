@@ -73,7 +73,7 @@ Here we provide demo of SEEKIN based on data provided in the `example` folder, w
 When assuming no population structure, we only need the genotype file of study samples (`Study.10K.vcf.gz`) to estimate kinship using SEEKIN.   
 
  ```
-  ./seekin kinship -i ./Study.10K.vcf.gz  -r 0.3  -m 0.05   -d DS  -p homo  -l 2000  -t 3  -w  1 -o Study.homo
+  ./seekin kinship -i ./Study.10K.vcf.gz  -r 0.3  -m 0.05   -d DS  -p hom  -l 2000  -t 3  -w  1 -o Study.hom
  ``` 
   
 The meaning of all command line options are listed below:
