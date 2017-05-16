@@ -68,7 +68,6 @@ int modelAF(int argc, char ** argv){
     initenv (argc, argv);
     paraCheck();
     getPCrelate(); 
-  	cout<<"["<< showtime()<< "] Finish!"; 
   	fclose(stdout);
 
 
