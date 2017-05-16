@@ -213,7 +213,7 @@ The output files have the same format as those described in section 6.1.
 
 
 
-## 6 Reference
+## 7 Reference
 
 1.  Wang, C. et al. Ancestry estimation and control of population stratification for sequence-based association studies. Nat Genet 46, 409-15 (2014)
 2.  Wang, C. et al. Improved ancestry estimation for both genotyping and sequencing data using projection procrustes analysis and genotype imputation. Am J Hum Genet 96, 926-937 (2015).
