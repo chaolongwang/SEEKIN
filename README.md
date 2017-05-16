@@ -112,16 +112,16 @@ This file provides the kinship estimation for all pairs of individuals.The colum
 
   ```
 Ind1    Ind2    NSNP    kinship
-ME-1M6WZX2      ME-1MYW4LL      8818    0.0051
+ME-1M6WZX2      ME-1MYW4LL      8818     0.0051
 ME-1M6WZX2      ME-245KCL5      8818    -0.0088
 ME-1M6WZX2      ME-2MZQ96C      8818    -0.0006
 ME-1M6WZX2      ME-2TGPSG7      8818    -0.0120
-ME-1M6WZX2      ME-5P732EC      8818    0.0082
+ME-1M6WZX2      ME-5P732EC      8818     0.0082
 ME-1M6WZX2      ME-667WJSP      8818    -0.0041
 ME-1M6WZX2      ME-777J4KU      8818    -0.0023
 ME-1M6WZX2      ME-7MLVX2W      8818    -0.0080
 ME-1M6WZX2      ME-937Q885      8818    -0.0072
-ME-1M6WZX2      ME-BBGMMRQ      8818    0.0070   
+ME-1M6WZX2      ME-BBGMMRQ      8818     0.0070   
   ```
   
 *  _.inbreed 
