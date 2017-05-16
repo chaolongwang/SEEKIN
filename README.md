@@ -1,6 +1,6 @@
 # SEEKIN software
 
-### SEEKIN:SEequence-based Estimation of KINship.
+### SEEKIN: SEequence-based Estimation of KINship.
 
 #### Author: Jinzhuang Dou  <douj@gis.a-star.edu.sg>, Chaolong Wang <wangcl@gis.a-star.edu.sg>
 
