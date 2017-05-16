@@ -220,18 +220,26 @@ static void getPCrelate(){
 //    dsiplay_usage  
 //*****************************************
 
-bool  modelAF_display_usage(){
 
+bool modelAF_display_usage ()
+{
 	cout << R"(
-seekin modelAF
-	  -i  The genotype file of reference samples (compressed gzipped VCF files). [no default value] 
-	  -c  The PCA coordinate file of reference samples. [no default value]
-	  -k  The number of PCs to compute. [default 2]. 
-	  -o  The output file name. [no default value]
+Usage: seekin modelAF [option]
+
+Options:
+	-i  File name of genotypes of reference individuals (gzipped VCF). [no default]
+	-c  File name of PCA coordinate of reference individuals. [no default]
+	-k  Number of PCs used to model allele frequencies. [default 2]
+	-o  Output file name. [default "AF.model"]
+
+Note: the coordinate file (-c) can be prepared using the LASER software 
+      (http://csg.sph.umich.edu/chaolong/LASER/)
+Example: seekin modelAF  -i reference.vcf.gz  -c ref.coord -k 4 -o ref.AF.model
 
 )";
-	return (true);
+  return (true);
 }
+
 
 
 //*****************************************

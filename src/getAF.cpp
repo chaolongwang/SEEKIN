@@ -139,8 +139,8 @@ static void getPCrelateAF(){
 
     string newName=outputStudyAF+".gz";
     IFILE OUTaf = ifopen(newName.c_str(),"wb",InputFile::BGZF);
-    ifprintf(OUTaf, "##fileformat=VCFv4.2\n##INFO=<ID=AF,Number=A,Type=Float,Description=\"Estimated Allele Frequencies of all samples\">\n");
-    ifprintf(OUTaf, "##FORMAT=<ID=AF1,Number=A,Type=Float,Description=\"Estimated individual specific Allele Frequencies\">\n");
+    ifprintf(OUTaf, "##fileformat=VCFv4.2\n##INFO=<ID=AF,Number=A,Type=Float,Description=\"Estimated allele frequencies averaged across all individuals\">\n");
+    ifprintf(OUTaf, "##FORMAT=<ID=AF1,Number=A,Type=Float,Description=\"Estimated individual-specific allele frequencies\">\n");
     ifprintf(OUTaf, "#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT");
     for(int i=0;i<studyIDnum;i++){
     	ifprintf(OUTaf, "\t%s", studyId[i].c_str());
@@ -180,26 +180,29 @@ static void getPCrelateAF(){
 	ifclose(OUTaf);
 	t2 = clock();
 	runningtime = (t2-t1)/CLOCKS_PER_SEC;
-	cout<<"["<< showtime() << "] : Finished\n";
+	cout<<"["<< showtime() << "] Finished!\n";
 	cout << "Total CPU time: " << runningtime << " seconds.\n" << endl;
 }
 
 
-
-
-bool  getAF_display_usage(){
-
+bool getAF_display_usage ()
+{
 	cout << R"(
-seekin getAF
-	-i  The PCA coordinate file of study samples. [no default value] 
-  	-b  The PC-related regression coefficient file of reference samples. [no default value]
-  	-k  The number of PCs to compute. [default 2]. 
-  	-o  The output file name. No need to add the .gz suffix. [no default value]
+Usage: seekin getAF [option]
+
+Options:
+	-i  File name of coordinates of study individuals in the reference space. [no default]
+	-b  File name of the allele frequency model. [default "AF.model"]
+	-k  Number of PCs used to compute allele frequencies. [default 2]
+	-o  Output file name of individual-specific allele frequencies. [default "indivAF.vcf.gz"]
+
+Note: the coordinate file (-i) can be prepared using the LASER software 
+      (http://csg.sph.umich.edu/chaolong/LASER/)
+Example: seekin getAF  -i study.coord  -b ref.AF.model -k 4 -o indivAF
 
 )";
-	return (true);
+  return (true);
 }
-
 
 
 

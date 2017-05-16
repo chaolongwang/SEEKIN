@@ -40,7 +40,10 @@ bool seekin_display_usage();
 
 int main (int argc, char ** argv ){
 
-	fprintf ( stderr, "\nVersion 1.00: released on 2017-3-10 \n");
+	cout << R"(
+SEEKIN: SEquence-based Estimation of kinship
+Version 1.00: released on 2017-Mar-10
+)";
 	argc--;
 	argv++;
 	if ( argc == 0 )
@@ -77,11 +80,14 @@ static void pipeline ( int argc, char ** argv )
 bool seekin_display_usage ()
 {
 	cout << R"(
-Usage: seekin <command> [option]
-		
-	modelAF	 Model PC-related regression coefficients of reference samples
-	getAF	 Estimate individual  allele frequencies of study samples
-	kinship	 Estimate kinship and inbreeding coefficients of study samples
+Usage: seekin <module> [option]
+
+Modules:
+	modelAF	 Model allele frequencies as linear functions of PCs using reference individuals
+	getAF	 Estimate individual-specific allele frequencies for study individuals
+	kinship	 Estimate pairwise kinship coefficients between study individuals
+
+Please type 'seekin <module> -h' to see options in each module.
 
 )";
 }

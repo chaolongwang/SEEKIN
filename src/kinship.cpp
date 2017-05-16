@@ -99,7 +99,7 @@ int kinship(int argc, char ** argv){
     foutLog<<"["<< showtime() << "] R2 filter " <<  R2_FILTER << "\n";
 
     gp_sampleNum=getVCFsampleNum(INPUT_FILE);
-    if(POP_STRUCT.compare("homo")==0){
+    if(POP_STRUCT.compare("hom")==0){
         KIN=homoEst(INPUT_FILE, gp_sampleNum, BLOCK_SIZE);
     }
     else{
@@ -290,7 +290,6 @@ static fmat admixEst(string gp_file, string af_indiv_file, int gp_sampleNum, int
 
     cout<<"["<< showtime() << "] Reading the markers in " << INPUT_FILE.c_str() << "\n";
     foutLog<<"["<< showtime() << "] Reading the markers in " << INPUT_FILE.c_str() << "\n";
-    //omp_set_num_threads(50);
     while(reader.readRecord(record)){              
         VcfRecordInfo& info = record.getInfo();
         string chr = record.getChromStr();
@@ -460,7 +459,7 @@ static void output(fmat &KIN, string OUTPUT_FILE, int gp_sampleNum, string input
     ofstream FOUT2;
     string tmp=OUTPUT_FILE+".kin";
     FOUT.open(tmp.c_str());
-    tmp=OUTPUT_FILE+".ID";
+    tmp=OUTPUT_FILE+".matrixID";
     FOUT1.open(tmp.c_str());
     tmp=OUTPUT_FILE+".inbreed";
     FOUT2.open(tmp.c_str());
@@ -536,27 +535,36 @@ static void checkHeader(int af_indiv_sampleNum, int gp_sampleNum, map<int,int> &
     }  
 }
 
-bool  display_usage(){
-
+bool display_usage ()
+{
     cout << R"(
-seekin kinship 
-      -i  The genotype file of study samples (compressed gzipped VCF files). [no default value]
-      -a  The individual allele frequency file of study samples (compressed gzipped VCF files). [no default value]
-      -r  Remove sites with Rsq less than the -r value. [default  0.3]  
-      -m  Remove sites with MAF less than the -m value. [default 0.05]  
-      -d  Kinship estimation based on observed genotypes or dosages. GT: the observed genotypes; 
-          DS:dosages. [default DS] 
-      -p  Population mode. homo: homogenous samples; admix: heterogenous samples. [default homo]  
-      -n  Number of markers to include per block. [default 10,000]  
-      -t  Number of threads of execution. [default 1]  
-      -w  Weight scheme when combing genome-wide markers. 1: 2pqRsq^2; 2: 2Rsq^2. [default 1]  
-      -o  Output file name prefix. 
+Usage: seekin kinship [options]
 
-    Note: the options –a and -p cannot be used for homogenous estimation. 
-      
+Options:
+      -i  File name of genotypes or dosages of study individuals (gzipped VCF). [no default]
+      -f  File name of allele frequencies for study individuals (gzipped VCF). [default "indivAF.vcf.gz"]
+      -r  Exclude SNPs with Rsq lower than the -r value. [default  0.5]  
+      -m  Exclude SNPs with MAF lower than the -m value. [default 0.05]
+      -d  Data used for kinship estimation. GT: genotype values in the GT field; 
+          DS: dosage values in the DS field. [default "DS"]
+      -p  Kinship estimator. hom: homogeneous estimator; het: heterogeneous estimator. [default "het"]
+      -w  Weighting scheme to combine estimates from multiple SNPs. 
+          1: MAF(1-MAF)Rsq^2; 2: Rsq^2. [default 1]  
+      -l  Number of SNPs in each computing block. [default 10,000]  
+      -t  Number of threads for parallel computation. [default 10] 
+      -o  Prefix of output file names. 
+
+Note: the option -f is NOT effective when -p is set to "hom". 
+Note: when the input file (-i) does not contain Rsq values (e.g. array genotyping data), 
+      -d will be set to "GT" and Rsq will be treated as 1.
+
+Example: seekin kinship -i study.vcf.gz -f study.indivAF.vcf.gz -p het -w 1 -o test 
+
+
 )";
-    return (true);
+  return (true);
 }
+
 
 vector<string> split(const string& src, string sp) { 
     vector<string> strs; 
@@ -662,9 +670,9 @@ static void paraCheck (){
         display_usage();
         exit(-1);    
     }
-    else if(POP_STRUCT.compare("homo")!=0 & POP_STRUCT.compare("admix")!=0 ){
-        cout<<"["<< showtime() << "] Error! The specified population structure mode is neither homo nor admix!\n";
-        foutLog<<"["<< showtime() << "] Error! The specified population structure mode is neither homo nor admix!\n";
+    else if(POP_STRUCT.compare("hom")!=0 & POP_STRUCT.compare("het")!=0 ){
+        cout<<"["<< showtime() << "] Error! The specified population structure mode is neither hom nor het!\n";
+        foutLog<<"["<< showtime() << "] Error! The specified population structure mode is neither hom nor het!\n";
         display_usage();
         exit(-1);   
     }
@@ -708,21 +716,21 @@ static void paraCheck (){
 
     // determine the estimator mode 
 
-    if(POP_STRUCT.compare("homo")==0 &  WEIGHT==2 ){
-        cout << "["<< showtime() << "] Use the homo mode with weight function r^4" << "\n";
-        foutLog << "["<< showtime() << "] Use the homo mode with weight function r^4" << "\n";
+    if(POP_STRUCT.compare("hom")==0 &  WEIGHT==2 ){
+        cout << "["<< showtime() << "] Use the hom mode with weight function r^4" << "\n";
+        foutLog << "["<< showtime() << "] Use the hom mode with weight function r^4" << "\n";
     }
-    else if(POP_STRUCT.compare("homo")==0 & WEIGHT==1){
-        cout << "["<< showtime() << "] Use the homo mode with weight function 2pqr^4" << "\n";
-        foutLog << "["<< showtime() << "] Use the homo mode with weight function 2pqr^4" << "\n";
+    else if(POP_STRUCT.compare("hom")==0 & WEIGHT==1){
+        cout << "["<< showtime() << "] Use the hom mode with weight function 2pqr^4" << "\n";
+        foutLog << "["<< showtime() << "] Use the hom mode with weight function 2pqr^4" << "\n";
     }
-    else if(POP_STRUCT.compare("admix")==0 & WEIGHT==2 & indivAFlag==1){
-        cout << "["<< showtime() << "] Use the admix mode with weight function r^4" << "\n";
-        foutLog << "["<< showtime() << "] Use the admix mode with weight function r^4" << "\n";
+    else if(POP_STRUCT.compare("het")==0 & WEIGHT==2 & indivAFlag==1){
+        cout << "["<< showtime() << "] Use the het mode with weight function r^4" << "\n";
+        foutLog << "["<< showtime() << "] Use the het mode with weight function r^4" << "\n";
     }
-    else if(POP_STRUCT.compare("admix")==0 & WEIGHT==1 & indivAFlag==1){
-        cout << "["<< showtime() << "] Use the admix mode with weight function 2pqr^4" << "\n";
-        foutLog << "["<< showtime() << "] Use the admix mode with weight function 2pqr^4" << "\n";
+    else if(POP_STRUCT.compare("het")==0 & WEIGHT==1 & indivAFlag==1){
+        cout << "["<< showtime() << "] Use the het mode with weight function 2pqr^4" << "\n";
+        foutLog << "["<< showtime() << "] Use the het mode with weight function 2pqr^4" << "\n";
     }
     else{
         cout << "["<< showtime() << "] Error! No mode is identified, please check the input files" << "\n";
@@ -765,7 +773,7 @@ static void initenv (int argc, char ** argv){
     char copt;
     int input=0;
 
-    while((copt=getopt(argc, argv, "i:o:w:a:r:m:d:n:p:t:h")) != EOF){
+    while((copt=getopt(argc, argv, "i:f:r:m:w:d:p:l:t:o:h")) != EOF){
         switch(copt){   
             case 'i':
                 input = 1;
@@ -780,7 +788,7 @@ static void initenv (int argc, char ** argv){
             case 'd':
                 GENE_MODE=strdup(optarg);
                 continue;
-            case 'a':
+            case 'f':
                 AF_INDIV_FILE=strdup(optarg);
                 continue;
             case 'r':
@@ -789,7 +797,7 @@ static void initenv (int argc, char ** argv){
             case 'm':
                 MAF_FILTER=atof(optarg);
                 continue;
-            case 'n':
+            case 'l':
                 BLOCK_SIZE=atof(optarg);
                 continue;
             case 'p':
