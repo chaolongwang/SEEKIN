@@ -204,6 +204,8 @@ This command estimates individual-specific allele frequencies based on the top 2
 With the estimated individual-specific allele frequencies, `Stdudy.10k.indvAF.vcf.gz`, we can run the kinship module to estimate kinship coefficients using the following command:
 
   ```
+  tabix -p vcf ./Study.10K.indvAF.vcf.gz
+  
   seekin kinship -i ./Study.10K.vcf.gz  -f  ./Study.10K.indvAF.vcf.gz  -r 0.3  -m 0.05   -d DS  -p het -l 2000  -t 3 -w 1  -o Study.10K.het
   ```
 Note that it is important to set `–p` to 'het' so that the SEEKIN-het estimator will be used and the `–f` option will be effective to take the individual-specific allele frequencies as input.
