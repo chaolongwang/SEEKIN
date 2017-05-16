@@ -111,20 +111,35 @@ This is the log file to monitor and record the progress for each module when run
 This file provides the kinship estimation for all pairs of individuals.The columns are individual IDs for the first and second individual of pair, number of SNPs used, and the estimated kinship coefficient, respectively. Example: 
 
   ```
-  Ind1    Ind2    NSNP    Kinship      
-  S1      S2      8592    0.0231     
-  S1      S3      8592    0.0370        
-  S1      S4      8592    0.0168      
+Ind1    Ind2    NSNP    kinship
+ME-1M6WZX2      ME-1MYW4LL      8818    0.0051
+ME-1M6WZX2      ME-245KCL5      8818    -0.0088
+ME-1M6WZX2      ME-2MZQ96C      8818    -0.0006
+ME-1M6WZX2      ME-2TGPSG7      8818    -0.0120
+ME-1M6WZX2      ME-5P732EC      8818    0.0082
+ME-1M6WZX2      ME-667WJSP      8818    -0.0041
+ME-1M6WZX2      ME-777J4KU      8818    -0.0023
+ME-1M6WZX2      ME-7MLVX2W      8818    -0.0080
+ME-1M6WZX2      ME-937Q885      8818    -0.0072
+ME-1M6WZX2      ME-BBGMMRQ      8818    0.0070   
   ```
   
 *  _.inbreed 
 
 This file provides the estimated inbreeding coefficient for each individual. The first column is individual ID and the second column is the estimated inbreeding coefficient. Example:
   ```
-  Ind1    Inbreed_coef
-  S1       0.0296
-  S2       0.0228
-  S3      -0.0338
+IID     INBREEDCOEF
+ME-1M6WZX2      -0.0342
+ME-1MYW4LL      -0.0191
+ME-245KCL5      -0.0086
+ME-2MZQ96C      -0.0150
+ME-2TGPSG7      -0.0060
+ME-5P732EC      -0.0230
+ME-667WJSP      -0.0990
+ME-777J4KU      -0.0297
+ME-7MLVX2W      -0.0228
+ME-937Q885      -0.0807
+ME-BBGMMRQ      -0.0219
   ```
   
 *  _.matrix and _.matrixID 
@@ -147,9 +162,16 @@ We model allele frequencies as linear functions of PCs based on the ancestry ref
 This command will generate a file, named SGVP.beta (specified by `–o`), which contains the intercepts and regression coefficients of first two PCs (specified by `-k`) based on genotypes (specified by `-i`) and PC coordinates (specified by `-c`) of the reference individuals. In this file, the first five columns are chromosome, position, reference allele, alternative allele, and allele frequencies of the alternative allele in the reference dataset, respectively. The remaining columns are the estimated intercept and regression coefficients for each PC. This file is tab-delimited. Example:  
 
   ```
-  CHROM   POS     REF     ALT      AF       beta0   beta1   
-  10     60969    C       A        0.48     0.96    -0.00    
-  10     70969    G       A        0.41     0.96    -0.10    
+CHROM   POS     REF     ALT     AF      beta0   beta1   beta2
+1       740857  G       A       0.013   0.026418      -4.93102e-05    -0.000123628
+1       1017197 C       T       0.711   1.421560      -0.000896592     0.000878442
+1       1241964 G       A       0.500   0.999935      -0.00123432      0.000292638
+1       1462766 C       T       0.351   0.701477      -0.00028479      8.94892e-05
+1       1715011 C       A       0.118   0.236869       2.67180000     -0.000551193
+1       1979724 C       A       0.226   0.451491      -0.000218917    -0.000157946
+1       2251160 T       C       0.397   0.794793       0.000322257    -7.75743e-05
+1       2505713 C       T       0.093   0.186592       0.000425398    -0.000163982
+1       2749716 G       T       0.308   0.615128      -5.39846e-05    -0.000770491
   ```
   
 * 6.2.2 Estimate individual-specific allele frequencies  
@@ -162,14 +184,19 @@ The individual specific allele frequencies of study individuals can be generated
 This command estimates individual-specific allele frequencies based on the top 2 PCs (specified by `–k`) in the coordinate file (specified by `-i`) and the regression coefficients (specified by `–b`). The outputs are stored in a gzipped VCF file (specified by` –o`). Example:
 
   ```
-  ##fileformat=VCFv4.2
-  ##INFO=<ID=AF,Number=A,Type=Float,Description="Estimated allele frequencies averaged across all individuals">
-  ##FORMAT=<ID=AF1,Number=A,Type=Float,Description="Estimated individual-specific allele frequencies">
-  #CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  ID1   ID2  ID3
-  1       11008   .       C       G       .       .       AF=0.0500       AF1     0.0534  0.0455  0.0536
-  1       12001   .       A       G       .       .       AF=0.0200       AF1     0.0231  0.4451  0.1537
-  1       13102   .       C       T       .       .       AF=0.4500       AF1     0.2514  0.0123  0.0216
-  1       14052   .       C       G       .       .       AF=0.6500       AF1     0.0524  0.0252  0.9531
+##fileformat=VCFv4.2
+##INFO=<ID=AF,Number=A,Type=Float,Description="Estimated allele frequencies averaged across all individuals">
+##FORMAT=<ID=AF1,Number=A,Type=Float,Description="Estimated individual-specific allele frequencies">
+#CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  ME-UGR9DZ9      ME-RH96Y5Y      ME-WUAGGVA      ME-6Q8D1FD
+1       740857  .       G       A       .       .       AF=0.0163       AF1     0.0247  0.0065  0.0269  0.0063  0.0057  0.0160  0.0271
+1       1017197 .       C       T       .       .       AF=0.7902       AF1     0.7653  0.8410  0.7530  0.8531  0.8508  0.7571  0.7492
+1       1241964 .       G       A       .       .       AF=0.6022       AF1     0.6205  0.6051  0.6188  0.6171  0.6114  0.5651  0.6158
+1       1462766 .       C       T       .       .       AF=0.3745       AF1     0.3775  0.3768  0.3767  0.3796  0.3784  0.3657  0.3760
+1       1715011 .       C       A       .       .       AF=0.1120       AF1     0.1428  0.0721  0.1519  0.0690  0.0677  0.1179  0.1534
+1       1979724 .       C       A       .       .       AF=0.2423       AF1     0.2575  0.2274  0.2607  0.2285  0.2269  0.2376  0.2607
+1       2251160 .       T       C       .       .       AF=0.3707       AF1     0.3660  0.3699  0.3664  0.3667  0.3682  0.3804  0.3672
+1       2505713 .       C       T       .       .       AF=0.0576       AF1     0.0549  0.0520  0.0565  0.0475  0.0493  0.0709  0.0577
+1       2749716 .       G       T       .       .       AF=0.3060       AF1     0.3517  0.2488  0.3646  0.2453  0.2430  0.3116  0.3665
   ```
 
 6.2.3 Estimate kinship coefficients for heterogeneous samples 
@@ -179,7 +206,6 @@ With the estimated individual-specific allele frequencies, `Stdudy.10k.indvAF.vc
   ```
   seekin kinship -i ./Study.10K.vcf.gz  -f  ./Study.10K.indvAF.vcf.gz  -r 0.3  -m 0.05   -d DS  -p het -l 2000  -t 3 -w 1  -o Study.10K.het
   ```
-  
 Note that it is important to set `–p` to 'het' so that the SEEKIN-het estimator will be used and the `–f` option will be effective to take the individual-specific allele frequencies as input.
 The output files have the same format as those described in section 6.1.
 
