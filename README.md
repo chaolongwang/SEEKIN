@@ -212,7 +212,7 @@ With the estimated individual-specific allele frequencies, `Stdudy.10k.indvAF.vc
   ```
 Note that it is important to set `–p` to 'het' so that the SEEKIN-het estimator will be used and the `–f` option will be effective to take the individual-specific allele frequencies. Other options can be found by typing `../bin/seekin kinship -h`.
 
-The output files have the same format as described in [Section 6.1](https://github.com/jinzhuangdou/SEEKIN/blob/master/README.md#61-seekin-hom-kinship-estimation-for-homogenous-samples) .
+The output files have the same format as described in [Section 6.1](https://github.com/jinzhuangdou/SEEKIN/blob/master/README.md#61-seekin-hom-kinship-estimation-for-homogenous-samples).
 
 
 
