@@ -221,7 +221,7 @@ The output files have the same format as described in [Section 6.1](https://gith
 ## 7. References
 
 1.  Wang C et al. (2014) Ancestry estimation and control of population stratification for sequence-based association studies. Nat Genet 46, 409-415.
-2.  Wang C et al. (2015) Improved ancestry estimation for both genotyping and sequencing data using projection procrustes analysis and genotype imputation. Am J Hum Genet 96, 926-937.
+2.  Wang C et al. (2015) Improved ancestry estimation for both genotyping and sequencing data using projection Procrustes analysis and genotype imputation. Am J Hum Genet 96, 926-937.
 3.  Browning BL & Browning SR (2009) A unified approach to genotype imputation and haplotype-phase inference for large data sets of trios and unrelated individuals. Am J Hum Genet 84, 210-223.
 4.  Thornton T et al. (2012) Estimating kinship in admixed populations. Am J Hum Genet 91, 122-138.
 5.  Conomos MP et al. (2016) Model-free estimation of recent genetic relatedness. Am J Hum Genet 98, 127-148.
