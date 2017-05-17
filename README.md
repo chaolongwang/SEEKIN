@@ -47,9 +47,9 @@ You can type the following command to get the list of help option.
 
 SEEKIN provides three modules 
 
-* **modelAF** for calculating the PC-related regression coefficients of reference samples;
-* **getAF** for estimating the individual allele frequencies of study samples; 
-* **kinship** for estimating kinship coefficients for samples from either homogenous or heterogenous samples.  
+* **modelAF** Model allele frequencies as linear functions of PCs using reference individuals;
+* **getAF** Estimate individual-specific allele frequencies for study individuals; 
+* **kinship** Estimate pairwise kinship coefficients between study individuals.  
 
 To get the detailed meaning of option for one module (for example `kinship`), you can type: 
 
@@ -144,7 +144,7 @@ ME-BBGMMRQ      -0.0219
   
 *  _.matrix and _.matrixID 
 
-The `_.matrix` file contains an N × N matrix of 2![Phi](http://latex.codecogs.com/gif.latex?%5Cphi), where ![Phi](http://latex.codecogs.com/gif.latex?%5Cphi) is the estimated kinship matrix of N study individuals. The `.matrixID` file contains individual IDs listed by the order in the `_.matrix` file and the input VCF file.
+The `_.matrix` file contains an N × N matrix of 2![Phi](http://latex.codecogs.com/gif.latex?%5Clarge%20%5Cmathbf%7B%5CPhi%20%7D), where ![Phi](http://latex.codecogs.com/gif.latex?%5Clarge%20%5Cmathbf%7B%5CPhi%20%7D) is the estimated kinship matrix of N study individuals. The `.matrixID` file contains individual IDs listed by the order in the `_.matrix` file and the input VCF file.
 
 
 ### 6.2. SEEKIN-het: kinship estimation for heterogenous samples with population structure and admixture
@@ -212,7 +212,7 @@ With the estimated individual-specific allele frequencies, `Stdudy.10k.indvAF.vc
   ```
 Note that it is important to set `–p` to 'het' so that the SEEKIN-het estimator will be used and the `–f` option will be effective to take the individual-specific allele frequencies. Other options can be found by typing `../bin/seekin kinship -h`.
 
-The output files have the same format as described in Section 6.1.
+The output files have the same format as described in [Section 6.1](https://github.com/jinzhuangdou/SEEKIN/edit/master/README.md#L71) .
 
 
 
