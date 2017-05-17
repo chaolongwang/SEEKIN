@@ -146,7 +146,7 @@ ME-BBGMMRQ      -0.0219
   
 *  _.matrix and _.matrixID 
 
-The `_.matrix` file contains an N × N matrix of 2![Phi](http://latex.codecogs.com/gif.latex?%5Clarge%20%5Cmathbf%7B%5CPhi%20%7D), where ![Phi](http://latex.codecogs.com/gif.latex?%5Clarge%20%5Cmathbf%7B%5CPhi%20%7D) is the estimated kinship matrix of N study individuals. The `.matrixID` file contains individual IDs listed by the order in the `_.matrix` file and the input VCF file.
+The `_.matrix` file contains an N × N matrix of 2![Phi](http://latex.codecogs.com/gif.latex?%5Cmathbf%7B%5CPhi%7D), where ![Phi](http://latex.codecogs.com/gif.latex?%5Cmathbf%7B%5CPhi%7D) is the estimated kinship matrix of N study individuals. The `.matrixID` file contains individual IDs listed by the order in the `_.matrix` file and the input VCF file.
 
 
 ### 6.2. SEEKIN-het: kinship estimation for heterogenous samples with population structure and admixture
