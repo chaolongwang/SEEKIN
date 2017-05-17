@@ -1,8 +1,8 @@
 # SEEKIN: SEquence-based Estimation of KINship
 
-#### Authors: Jinzhuang Dou, Chaolong Wang
+#### Authors: Jinzhuang Dou  <douj@gis.a-star.edu.sg>, Chaolong Wang <wangcl@gis.a-star.edu.sg>
 
-#### License: [GNU General Public License v3.0 (GPLv3)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+#### License: GNU General Public License v3.0 (GPLv3)
 ---
 
 ## 1. Description
@@ -21,7 +21,7 @@ If you have questions or find any bug in the software, please email Jinzhuang Do
 ## 2. Citation for SEEKIN 
 
 Details of our SEEKIN method can be found at:  
-* Dou J, Sun B, Sim X, Hughes JD, Reilly DF, Tai ES, Liu J, Wang C. Estimation of kinship coefficients using sparse sequencing data. (Manuscript submitted)
+* Dou, J. et al. Estimation of kinship coefficients using sparse sequencing data. (Manuscript submitted)
 
 
 ## 3. Dependencies
@@ -41,21 +41,19 @@ If you want to compile your own version, please enter the `src/` folder, change 
 
 
 ## 5. Usage 
-You can type the following command to get the help information.
+You can type the following command to get the list of help option.
 
 `seekin -h`  
 
 SEEKIN provides three modules 
 
-* **modelAF** Model allele frequencies as linear functions of PCs using reference individuals
-* **getAF** Estimate individual-specific allele frequencies for study individuals 
-* **kinship** Estimate pairwise kinship coefficients between study individuals
+* **modelAF** Model allele frequencies as linear functions of PCs using reference individuals;
+* **getAF** Estimate individual-specific allele frequencies for study individuals; 
+* **kinship** Estimate pairwise kinship coefficients between study individuals.  
 
-To get the detailed information on available options for each module (for example `kinship`), you can type: 
+To get the detailed meaning of option for one module (for example `kinship`), you can type: 
 
 `seekin kinship -h`  
-
-We will go through instructions of the software using examples in the following section.
 
 ## 6. Examples
 
@@ -146,7 +144,7 @@ ME-BBGMMRQ      -0.0219
   
 *  _.matrix and _.matrixID 
 
-The `_.matrix` file contains an N × N matrix of 2![Phi](http://latex.codecogs.com/gif.latex?%5Clarge%20%5Cmathbf%7B%5CPhi%20%7D), where ![Phi](http://latex.codecogs.com/gif.latex?%5Clarge%20%5Cmathbf%7B%5CPhi%20%7D) is the estimated kinship matrix of N study individuals. The `.matrixID` file contains individual IDs listed by the order in the `_.matrix` file and the input VCF file.
+The `_.matrix` file contains an N × N matrix of 2![Phi](http://latex.codecogs.com/gif.latex?%5Cmathbf%7B%5CPhi%7D), where ![Phi](http://latex.codecogs.com/gif.latex?%5Cmathbf%7B%5CPhi%7D) is the estimated kinship matrix of N study individuals. The `.matrixID` file contains individual IDs listed by the order in the `_.matrix` file and the input VCF file.
 
 
 ### 6.2. SEEKIN-het: kinship estimation for heterogenous samples with population structure and admixture
@@ -220,9 +218,9 @@ The output files have the same format as described in [Section 6.1](https://gith
 
 ## 7. References
 
-1.  Wang C et al. (2014) Ancestry estimation and control of population stratification for sequence-based association studies. Nat Genet 46, 409-415.
-2.  Wang C et al. (2015) Improved ancestry estimation for both genotyping and sequencing data using projection Procrustes analysis and genotype imputation. Am J Hum Genet 96, 926-937.
-3.  Browning BL & Browning SR (2009) A unified approach to genotype imputation and haplotype-phase inference for large data sets of trios and unrelated individuals. Am J Hum Genet 84, 210-223.
-4.  Thornton T et al. (2012) Estimating kinship in admixed populations. Am J Hum Genet 91, 122-138.
-5.  Conomos MP et al. (2016) Model-free estimation of recent genetic relatedness. Am J Hum Genet 98, 127-148.
-6.  Teo YY et al. (2009) Singapore Genome Variation Project: a haplotype map of three Southeast Asian populations. Genome Res 19, 2154-2162.
+1.  Wang, C. et al. (2014) Ancestry estimation and control of population stratification for sequence-based association studies. Nat Genet 46, 409-415.
+2.  Wang, C. et al. (2015) Improved ancestry estimation for both genotyping and sequencing data using projection procrustes analysis and genotype imputation. Am J Hum Genet 96, 926-937.
+3.  Browning, B.L. & Browning, S.R. (2009) A unified approach to genotype imputation and haplotype-phase inference for large data sets of trios and unrelated individuals. Am J Hum Genet 84, 210-223.
+4.  Thornton, T. et al. (2012) Estimating kinship in admixed populations. Am J Hum Genet 91, 122-138.
+5.  Conomos, M.P. et al. (2016) Model-free estimation of recent genetic relatedness. Am J Hum Genet 98, 127-148.
+6.  Teo, Y.Y et al. (2009) Singapore Genome Variation Project: a haplotype map of three Southeast Asian populations. Genome Res 19, 2154-2162.
