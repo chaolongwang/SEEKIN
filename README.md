@@ -199,6 +199,8 @@ This command estimates individual-specific allele frequencies based on the top 2
 1       2749716 .       G       T       .       .       AF=0.3060       AF1     0.3517  0.2488  0.3646  0.2453  0.2430  0.3116  0.3665
   ```
 
+To avoid out of boundary values, we force allele frequencies to be 0.001 or 0.999 when AF1<0.001 or AF1>0.999, respectively.
+
 #### 6.2.3. Estimate kinship coefficients for heterogeneous samples 
 
 With the estimated individual-specific allele frequencies, `Stdudy.10k.indvAF.vcf.gz`, we can run the kinship module to estimate kinship coefficients using the following command:
@@ -215,7 +217,7 @@ The output files have the same format as described in section 6.1.
 
 ## 7. References
 
-1.  Wang, C. et al. (2014) Ancestry estimation and control of population stratification for sequence-based association studies. Nat Genet 46, 409-415
+1.  Wang, C. et al. (2014) Ancestry estimation and control of population stratification for sequence-based association studies. Nat Genet 46, 409-415.
 2.  Wang, C. et al. (2015) Improved ancestry estimation for both genotyping and sequencing data using projection procrustes analysis and genotype imputation. Am J Hum Genet 96, 926-937.
 3.  Browning, B.L. & Browning, S.R. (2009) A unified approach to genotype imputation and haplotype-phase inference for large data sets of trios and unrelated individuals. Am J Hum Genet 84, 210-223.
 4.  Thornton, T. et al. (2012) Estimating kinship in admixed populations. Am J Hum Genet 91, 122-138.
