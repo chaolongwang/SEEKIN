@@ -21,7 +21,7 @@ If you have questions or find any bug in the software, please email Jinzhuang Do
 ## 2. Citation for SEEKIN 
 
 Details of our SEEKIN method can be found at:  
-* Dou, J. et al. Estimation of kinship coefficients using sparse sequencing data. (Manuscript submitted)
+* Dou J, Sun B, Sim X, Hughes JD, Reilly DF, Tai ES, Liu J, Wang C. Estimation of kinship coefficients using sparse sequencing data. (Manuscript submitted)
 
 
 ## 3. Dependencies
@@ -218,9 +218,9 @@ The output files have the same format as described in [Section 6.1](https://gith
 
 ## 7. References
 
-1.  Wang, C. et al. (2014) Ancestry estimation and control of population stratification for sequence-based association studies. Nat Genet 46, 409-415.
-2.  Wang, C. et al. (2015) Improved ancestry estimation for both genotyping and sequencing data using projection procrustes analysis and genotype imputation. Am J Hum Genet 96, 926-937.
-3.  Browning, B.L. & Browning, S.R. (2009) A unified approach to genotype imputation and haplotype-phase inference for large data sets of trios and unrelated individuals. Am J Hum Genet 84, 210-223.
-4.  Thornton, T. et al. (2012) Estimating kinship in admixed populations. Am J Hum Genet 91, 122-138.
-5.  Conomos, M.P. et al. (2016) Model-free estimation of recent genetic relatedness. Am J Hum Genet 98, 127-148.
-6.  Teo, Y.Y et al. (2009) Singapore Genome Variation Project: a haplotype map of three Southeast Asian populations. Genome Res 19, 2154-2162.
+1.  Wang C et al. (2014) Ancestry estimation and control of population stratification for sequence-based association studies. Nat Genet 46, 409-415.
+2.  Wang C et al. (2015) Improved ancestry estimation for both genotyping and sequencing data using projection procrustes analysis and genotype imputation. Am J Hum Genet 96, 926-937.
+3.  Browning BL & Browning SR (2009) A unified approach to genotype imputation and haplotype-phase inference for large data sets of trios and unrelated individuals. Am J Hum Genet 84, 210-223.
+4.  Thornton T et al. (2012) Estimating kinship in admixed populations. Am J Hum Genet 91, 122-138.
+5.  Conomos MP et al. (2016) Model-free estimation of recent genetic relatedness. Am J Hum Genet 98, 127-148.
+6.  Teo YY et al. (2009) Singapore Genome Variation Project: a haplotype map of three Southeast Asian populations. Genome Res 19, 2154-2162.
