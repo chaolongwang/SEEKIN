@@ -2,7 +2,7 @@
 
 #### Authors: Jinzhuang Dou  <douj@gis.a-star.edu.sg>, Chaolong Wang <wangcl@gis.a-star.edu.sg>
 
-#### License: GNU General Public License v3.0 (GPLv3)
+#### License: [GNU General Public License v3.0 (GPLv3)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 ---
 
 ## 1. Description
