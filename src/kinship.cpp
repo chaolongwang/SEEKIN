@@ -465,8 +465,8 @@ static void output(fmat &KIN, string OUTPUT_FILE, int gp_sampleNum, string input
     FOUT2.open(tmp.c_str());
     cout<<"["<< showtime() << "] Write results to \"" << OUTPUT_FILE << ".*\"\n";
     FOUT << setiosflags(ios::fixed)<<setprecision(4);
-    FOUT << "Ind1\tInd2\tNSNP\tkinship\n";
-    FOUT2 << "IID\tINBREEDCOEF\n";       
+    FOUT << "ind1\tind2\tnsnp\tkinship\n";
+    FOUT2 << "indivID\tinbreeding\n";       
 
     VcfHeader gp_header;
     VcfFileReader gp_reader;
@@ -489,7 +489,7 @@ static void output(fmat &KIN, string OUTPUT_FILE, int gp_sampleNum, string input
     tmp=OUTPUT_FILE+".matrix";
     FOUT.open(tmp.c_str());
     FOUT << setiosflags(ios::fixed)<<setprecision(4);
-    FOUT << KIN ;
+    FOUT << 2*KIN ;
     FOUT.close();
 }
 
