@@ -41,19 +41,21 @@ If you want to compile your own version, please enter the `src/` folder, change 
 
 
 ## 5. Usage 
-You can type the following command to get the list of help option.
+You can type the following command to get the help information.
 
 `seekin -h`  
 
 SEEKIN provides three modules 
 
-* **modelAF** Model allele frequencies as linear functions of PCs using reference individuals;
-* **getAF** Estimate individual-specific allele frequencies for study individuals; 
-* **kinship** Estimate pairwise kinship coefficients between study individuals.  
+* **modelAF** Model allele frequencies as linear functions of PCs using reference individuals
+* **getAF** Estimate individual-specific allele frequencies for study individuals 
+* **kinship** Estimate pairwise kinship coefficients between study individuals
 
-To get the detailed meaning of option for one module (for example `kinship`), you can type: 
+To get the detailed information on available options for each module (for example `kinship`), you can type: 
 
 `seekin kinship -h`  
+
+We will go through instructions of the software using examples in the following section.
 
 ## 6. Examples
 
