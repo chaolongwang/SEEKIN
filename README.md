@@ -1,8 +1,6 @@
-# SEEKIN software
+# SEEKIN: SEquence-based Estimation of KINship
 
-### SEEKIN: SEquence-based Estimation of KINship.
-
-#### Author: Jinzhuang Dou  <douj@gis.a-star.edu.sg>, Chaolong Wang <wangcl@gis.a-star.edu.sg>
+#### Authors: Jinzhuang Dou  <douj@gis.a-star.edu.sg>, Chaolong Wang <wangcl@gis.a-star.edu.sg>
 
 #### License: GNU General Public License v3.0 (GPLv3)
 ---
@@ -16,18 +14,18 @@ SEEKIN includes a homogeneous estimator for samples from the sample population (
 
 Our SEEKIN estimators are also applicable to high-quality genotyping data, such as those from array-genotyping or deep whole-genome sequencing studies. In this special case of no genotype uncertainty, SEEKIN performs similarly to existing kinship estimation programs. 
 
-In terms of implementation, SEEKIN utilizes a "single producer/consumer" design for parallel computation and takes the standard gzipped VCF file as the input.  SEEKIN is both computationally and memory efficient and is scalable to estimate pairwise kinship between 10,000s of individuals on a typical computing cluster.
+In terms of implementation, SEEKIN utilizes a "single producer/consumer" design for parallel computation and takes the standard gzipped VCF file as the input. SEEKIN is both computationally and memory efficient and is scalable to estimate pairwise kinship between 10,000s of individuals on a typical computing cluster.
 
-If you have any bug reports or questions, please send an email to Jinzhuang Dou at <douj@gis.a-star.edu.sg> or Chaolong Wang at <wangcl@gis.a-star.edu.sg>.
+If you have questions or find any bug in the software, please email Jinzhuang Dou at <douj@gis.a-star.edu.sg> or [Chaolong Wang](http://chaolongwang.github.io) at <wangcl@gis.a-star.edu.sg>.
 
 ## 2. Citation for SEEKIN 
 
 Details of our SEEKIN method can be found at:  
-Dou, J. et al. Estimation of kinship coefficients using sparse sequencing data. (Manuscript submitted)
+* Dou, J. et al. Estimation of kinship coefficients using sparse sequencing data. (Manuscript submitted)
 
 
 ## 3. Dependencies
-* gcc >= 4.9
+* gcc compiler (version >= 4.9)
 * [OpenBLAS](http://www.openblas.net/)
 * [Armadillo](http://arma.sourceforge.net/)
 
@@ -37,11 +35,10 @@ You can download SEEKIN by typing the following command in a terminal.
 
 `git clone https://github.com/jinzhuangdou/SEEKIN.git` 
 
-This command will create a folder named "SEEKIN" in the current directory. The downloaded package contains a statically linked binary executable seekin (in the `bin/` folder), which was pre-compiled and tested in 64-bit Linux machine.  
+This command will create a folder named "SEEKIN" in the current directory. The downloaded package contains a statically linked binary executable named `seekin` (in the `bin/` folder), which was pre-compiled and tested on a 64-bit Linux machine.  
 
-If you want to compile your own version, please enter the `src/` folder, change the library paths in the beginning of the Makefile accordingly, and type the following command to compile
+If you want to compile your own version, please enter the `src/` folder, change the library paths in the beginning of the `Makefile` accordingly, and type `make` to compile.
 
-`cd SEEKIN/src && make`
 
 ## 5. Usage 
 You can type the following command to get the list of help option.
@@ -60,17 +57,18 @@ To get the detailed meaning of option for one module (for example `kinship`), yo
 
 ## 6. Examples
 
-Here we provide demo of SEEKIN based on data provided in the `example` folder, which include:
+Here we provide demo of SEEKIN based on data provided in the `example/` folder, which include:
 
-* **Study.10K.vcf.gz**   This file includes genotypes of ~10,000 randomly selected SNP for 50 Chinese and 50 Malays. The genotypes were called from off-target data in a WES study using [BEAGLE](https://faculty.washington.edu/browning/beagle/beagle.html) with a reference panel from the 1000 Genome Project. This example dataset is highly noisy and is only for illustration purpose. 
+* **Study.10K.vcf.gz**   This file includes genotypes of ~10,000 randomly selected SNP for 50 Chinese and 50 Malays. The genotypes were called from off-target data in a WES study using [BEAGLE](https://faculty.washington.edu/browning/beagle/beagle.html) with a reference panel from [the 1000 Genomes Project](http://www.internationalgenome.org/). This example dataset contains noisy genotype data and is only for illustration purpose. 
 
-* **SGVP.12K.vcf.gz**   This file includes array genotyping data on ~12,000 SNPs, including ~9,000 SNPs overlapping with the Study.10K.vcf.gz file. This dataset is a subset of the data from the Singapore Genome Variation Project  [SGVP](http://phg.nus.edu.sg/#) [6]. This dataset is intended to be the ancestry reference panel for estimating individual-specific allele frequencies for SEEKIN-het. 
+* **SGVP.12K.vcf.gz**   This file includes array genotyping data of 268 individuals (Chinese, Malay, and Indian) on ~12,000 SNPs, including ~9,000 SNPs overlapping with the Study.10K.vcf.gz file. This dataset is a subset of the Singapore Genome Variation Project  ([SGVP](http://phg.nus.edu.sg/#sgvp)) [6]. This dataset is intended to be the ancestry reference panel for estimating individual-specific allele frequencies for the SEEKIN-het estimator.
+
 * **SGVP.RefPC.coord**   This file contains PCA coordinates of the top 10 PCs for the reference individuals in SGVP.12K.vcf.gz. This file was generated by the [LASER](http://csg.sph.umich.edu/chaolong/LASER/) software.  
 
 * **Study.onSGVP.PC.coord**   This file contains the top 2 PCs for the study individuals in the SGVP reference ancestry space (`SGVP.RefPC.coord`). This file can be prepared using the [LASER](http://csg.sph.umich.edu/chaolong/LASER/) software with either sparse sequence reads or array genotyping data. 
 
   
-#### 6.1. SEEKIN-hom: kinship estimation for homogenous samples
+### 6.1. SEEKIN-hom: kinship estimation for homogenous samples
 
 When assuming no population structure, we only need the genotype file of study samples (`Study.10K.vcf.gz`) to estimate kinship using SEEKIN.   
 
@@ -78,7 +76,7 @@ When assuming no population structure, we only need the genotype file of study s
   ../bin/seekin kinship -i ./Study.10K.vcf.gz  -r 0.3  -m 0.05   -d DS  -p hom  -l 2000  -t 3  -w  1 -o Study.hom
  ``` 
   
-The meaning of all command line options are listed below:
+The meaning of all command line options are listed below (which can be found by typing `seekin kinship -h`):
 
 ```
 Usage: seekin kinship [options]
@@ -102,7 +100,7 @@ Note: when the input file (-i) does not contain Rsq values (e.g. array genotypin
       -d will be set to "GT" and Rsq will be treated as 1.
 ``` 
 
-The output includes 5 files with prefixes `Study.10K.homo` specified by `-o` flag. 
+The output includes 5 files with prefix `Study.10K.hom` (specified by `-o`). 
 
 *  _.log
 
@@ -130,7 +128,7 @@ ME-1M6WZX2      ME-BBGMMRQ      8818     0.0070
 
 This file provides the estimated inbreeding coefficient for each individual. The first column is individual ID and the second column is the estimated inbreeding coefficient. Example:
   ```
-IID     INBREEDCOEF
+indivID     inbreeding
 ME-1M6WZX2      -0.0342
 ME-1MYW4LL      -0.0191
 ME-245KCL5      -0.0086
@@ -149,7 +147,7 @@ ME-BBGMMRQ      -0.0219
 The `_.matrix` file contains an N × N matrix of 2![phi](http://latex.codecogs.com/gif.latex?%5Cphi), where ![phi](http://latex.codecogs.com/gif.latex?%5Cphi) is the estimated kinship matrix of N study individuals. The `.matrixID` file contains the individual IDs corresponding to the order in the `_.matrix` file (also the same order as in the VCF file).
 
 
-#### 6.2. SEEKIN-het: kinship estimation for heterogenous samples with population structure and admixture
+### 6.2. SEEKIN-het: kinship estimation for heterogenous samples with population structure and admixture
 
 To estimate kinship coefficients for samples with population structure and admixture, we need to first estimate the ancestry background of each individual and derive individual-specific allele frequencies. We use [LASER](http://csg.sph.umich.edu/chaolong/LASER/) to estimate individual ancestry background, which applicable to both shallow sequencing data and genotyping data under a unified framework given an external ancestry reference panel [1,2].  Details of [LASER](http://csg.sph.umich.edu/chaolong/LASER/) can be found on the [LASER](http://csg.sph.umich.edu/chaolong/LASER/). Here, we assume the ancestry coordinates for both the reference individuals and the study individuals have been properly generated by [LASER](http://csg.sph.umich.edu/chaolong/LASER/).
 
@@ -206,20 +204,20 @@ This command estimates individual-specific allele frequencies based on the top 2
 With the estimated individual-specific allele frequencies, `Stdudy.10k.indvAF.vcf.gz`, we can run the kinship module to estimate kinship coefficients using the following command:
 
   ```
-  tabix -p vcf ./Study.10K.indvAF.vcf.gz
+  tabix Study.10K.indvAF.vcf.gz  # indexing the file
   
-  ../bin/seekin kinship -i ./Study.10K.vcf.gz  -f  ./Study.10K.indvAF.vcf.gz  -r 0.3  -m 0.05   -d DS  -p het -l 2000  -t 3 -w 1  -o Study.10K.het
+  ../bin/seekin kinship -i Study.10K.vcf.gz -f Study.10K.indvAF.vcf.gz -r 0.3 -m 0.05 -d DS -p het -l 2000 -t 3 -o Study.10K.het
   ```
-Note that it is important to set `–p` to 'het' so that the SEEKIN-het estimator will be used and the `–f` option will be effective to take the individual-specific allele frequencies as input.
-The output files have the same format as those described in section 6.1.
+Note that it is important to set `–p` to 'het' so that the SEEKIN-het estimator will be used and the `–f` option will be effective to take the individual-specific allele frequencies.
+The output files have the same format as described in section 6.1.
 
 
 
-## 7. Reference
+## 7. References
 
-1.  Wang, C. et al. Ancestry estimation and control of population stratification for sequence-based association studies. Nat Genet 46, 409-15 (2014)
-2.  Wang, C. et al. Improved ancestry estimation for both genotyping and sequencing data using projection procrustes analysis and genotype imputation. Am J Hum Genet 96, 926-937 (2015).
-3.  Browning, B.L. & Browning, S.R. A unified approach to genotype imputation and haplotype-phase inference for large data sets of trios and unrelated individuals. Am J Hum Genet 84, 210-23 (2009).
-4.  Thornton, T. et al. Estimating kinship in admixed populations. Am J Hum Genet 91, 122-138 (2012).
-5.  Conomos, M.P. et al. Model-free estimation of recent genetic relatedness. Am J Hum Genet 98, 127-148 (2016).
-6. Teo, Y.Y et al. Singapore Genome Variation Project: a haplotype map of three Southeast Asian populations. Genome Res 19, 2154-2162 (2009).
+1.  Wang, C. et al. (2014) Ancestry estimation and control of population stratification for sequence-based association studies. Nat Genet 46, 409-415
+2.  Wang, C. et al. (2015) Improved ancestry estimation for both genotyping and sequencing data using projection procrustes analysis and genotype imputation. Am J Hum Genet 96, 926-937.
+3.  Browning, B.L. & Browning, S.R. (2009) A unified approach to genotype imputation and haplotype-phase inference for large data sets of trios and unrelated individuals. Am J Hum Genet 84, 210-223.
+4.  Thornton, T. et al. (2012) Estimating kinship in admixed populations. Am J Hum Genet 91, 122-138.
+5.  Conomos, M.P. et al. (2016) Model-free estimation of recent genetic relatedness. Am J Hum Genet 98, 127-148.
+6.  Teo, Y.Y et al. (2009) Singapore Genome Variation Project: a haplotype map of three Southeast Asian populations. Genome Res 19, 2154-2162.
