@@ -1,6 +1,6 @@
 # SEEKIN: SEquence-based Estimation of KINship
 
-#### Authors: [Jinzhuang Dou](<douj@gis.a-star.edu.sg>), [Chaolong Wang](<wangcl@gis.a-star.edu.sg>)
+#### Authors: Jinzhuang Dou, [Chaolong Wang](http://chaolongwang.github.io)
 
 #### License: [GNU General Public License v3.0 (GPLv3)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 ---
