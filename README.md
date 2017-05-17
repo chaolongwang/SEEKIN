@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # SEEKIN: SEquence-based Estimation of KINship
 
 #### Authors: Jinzhuang Dou, [Chaolong Wang](http://chaolongwang.github.io)
