@@ -34,7 +34,7 @@ Details of the SEEKIN method can be found in our paper:
 
 You can download SEEKIN by typing the following command in a terminal.
 
-`git clone https://github.com/jinzhuangdou/SEEKIN.git` 
+`git clone https://github.com/chaolongwang/SEEKIN.git` 
 
 This command will create a folder named "SEEKIN" in the current directory. The downloaded package contains a statically linked binary executable named `seekin` (in the `bin/` folder), which was pre-compiled and tested on a 64-bit Linux machine.  
 
