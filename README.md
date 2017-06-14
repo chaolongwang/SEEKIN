@@ -22,7 +22,7 @@ If you have questions or find any bug in the software, please email Jinzhuang Do
 ## 2. Citation for SEEKIN 
 
 Details of the SEEKIN method can be found in our paper:  
-* Dou J, Sun B, Sim X, Hughes JD, Reilly DF, Tai ES, Liu J, Wang C. Estimation of kinship coefficients using sparse sequencing data. (Manuscript submitted)
+* Dou J, Sun B, Sim X, Hughes JD, Reilly DF, Tai ES, Liu J, Wang C. Estimation of kinship coefficient in structured and admixed populations using sparse sequencing data. (Manuscript submitted)
 
 
 ## 3. Dependencies
