@@ -29,7 +29,7 @@ ofstream foutLog;
 string INPUT_FILE =default_str;
 string OUTPUT_FILE = default_str;
 string AF_REF_FILE = default_str;
-string AF_INDIV_FILE = "NA";
+string AF_INDIV_FILE = "[]";
 string POP_STRUCT = default_str;
 int WEIGHT=1;
 string LOG_FILE="seekin";
@@ -618,7 +618,7 @@ static void paraCheck (){
     foutLog << "********************\n";
     fprintf ( stdout, "Parameters: \n" );
     fprintf ( stdout, " -i %s \n", INPUT_FILE.c_str() );
-    fprintf ( stdout, " -a %s \n", AF_INDIV_FILE.c_str() );
+    fprintf ( stdout, " -f %s \n", AF_INDIV_FILE.c_str() );
     fprintf ( stdout, " -o %s \n", OUTPUT_FILE.c_str() );
     fprintf ( stdout, " -r %f \n", R2_FILTER);
     fprintf ( stdout, " -m %f \n", MAF_FILTER);
@@ -626,7 +626,7 @@ static void paraCheck (){
     fprintf ( stdout, " -p %s \n", POP_STRUCT.c_str() );
     // The output of weight is always zero, fix me. 
     fprintf ( stdout, " -w %d \n", WEIGHT);
-    fprintf ( stdout, " -n %d \n", BLOCK_SIZE);
+    fprintf ( stdout, " -l %d \n", BLOCK_SIZE);
     fprintf ( stdout, " -t %d \n\n", THREAD_NUM);
 
 
@@ -695,7 +695,7 @@ static void paraCheck (){
         exit(-1);
     }
 
-    if(AF_INDIV_FILE.compare(default_str)!=0){
+    if(AF_INDIV_FILE.compare("[]")!=0){
         fin.open(AF_INDIV_FILE.c_str());
         if(fin.fail()){
             cout << "["<< showtime() << "] Error! Fail to open the individual-specific allele frequency file " << AF_INDIV_FILE.c_str()  << "\n";
