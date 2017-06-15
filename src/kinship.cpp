@@ -717,20 +717,20 @@ static void paraCheck (){
     // determine the estimator mode 
 
     if(POP_STRUCT.compare("hom")==0 &  WEIGHT==2 ){
-        cout << "["<< showtime() << "] Use the hom mode with weight function r^4" << "\n";
-        foutLog << "["<< showtime() << "] Use the hom mode with weight function r^4" << "\n";
+        cout << "["<< showtime() << "] Use the hom mode with weight function Rsq^2" << "\n";
+        foutLog << "["<< showtime() << "] Use the hom mode with weight function Rsq^2" << "\n";
     }
     else if(POP_STRUCT.compare("hom")==0 & WEIGHT==1){
-        cout << "["<< showtime() << "] Use the hom mode with weight function 2pqr^4" << "\n";
-        foutLog << "["<< showtime() << "] Use the hom mode with weight function 2pqr^4" << "\n";
+        cout << "["<< showtime() << "] Use the hom mode with weight function 2MAF(1-MAF)Rsq^2" << "\n";
+        foutLog << "["<< showtime() << "] Use the hom mode with weight function 2MAF(1-MAF)Rsq^2" << "\n";
     }
     else if(POP_STRUCT.compare("het")==0 & WEIGHT==2 & indivAFlag==1){
-        cout << "["<< showtime() << "] Use the het mode with weight function r^4" << "\n";
-        foutLog << "["<< showtime() << "] Use the het mode with weight function r^4" << "\n";
+        cout << "["<< showtime() << "] Use the het mode with weight function Rsq^2" << "\n";
+        foutLog << "["<< showtime() << "] Use the het mode with weight function Rsq^2" << "\n";
     }
     else if(POP_STRUCT.compare("het")==0 & WEIGHT==1 & indivAFlag==1){
-        cout << "["<< showtime() << "] Use the het mode with weight function 2pqr^4" << "\n";
-        foutLog << "["<< showtime() << "] Use the het mode with weight function 2pqr^4" << "\n";
+        cout << "["<< showtime() << "] Use the het mode with weight function 2MAF(1-MAF)Rsq^2" << "\n";
+        foutLog << "["<< showtime() << "] Use the het mode with weight function 2MAF(1-MAF)Rsq^2" << "\n";
     }
     else{
         cout << "["<< showtime() << "] Error! No mode is identified, please check the input files" << "\n";
