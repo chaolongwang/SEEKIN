@@ -15,9 +15,9 @@ OpenblasLibPath =  /mnt/projects/wangcl/ancestry/usr/opt/OpenBLAS/lib
 
 
 
-GCCVERSIONMAJOR := $(shell expr `$(CXX) -dumpversion | cut -f1-2 -d.` \>= 4.9) 
+# GCCVERSIONMAJOR := $(shell expr `$(CXX) -dumpversion | cut -f1-2 -d.` \>= 4.9) 
 
-CFLAGS=         -g -O0 -std=c++11 -pipe 
+CFLAGS=         -g -O3 -std=c++11 -pipe 
         
 OBJS=		getAF.o  modelAF.o  kinship.o seekin.o 
 PROG=       seekin
@@ -42,13 +42,7 @@ endif
 
 all:	seekin
 
-modules:
-		git submodule update --init --recursive 
-envTest:
-		@test $(BIT_ERR) != 1 || sh -c 'echo "Fatal: 64bit CPU and Operating System required!";false;'
-		@test $(GCCVERSIONMAJOR) == 1 || sh -c 'echo "GCC version lower than 4.9.0";false;'
-
-seekin:	envTest $(OBJS)
+seekin:	
 		@printf "Linking...                                                \r"
 		@$(CXX)   $(CFLAGS)  -static  -o $(PROG) $(OBJS)  $(LIBPATH) $(LIBS)   $(ENTRAFLAGS) -Xlinker -zmuldefs 
 		@printf "$(PROG) compilation done.\n";
@@ -59,5 +53,3 @@ clean:
 		@rm -fr gmon.out *.o a.out *.exe *.dSYM $(PROG) *~ *.a *.so.* *.so 
 		@printf "$(PROG) cleaning done.\n";
 
-install:
-		@printf "$(PROG) installed at ../bin/$(PROG)\n"
