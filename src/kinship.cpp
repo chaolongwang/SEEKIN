@@ -695,7 +695,7 @@ static void paraCheck (){
         exit(-1);
     }
 
-    if(AF_INDIV_FILE.compare(default_str)!=0){
+    if(AF_INDIV_FILE.compare("[]")!=0){
         fin.open(AF_INDIV_FILE.c_str());
         if(fin.fail()){
             cout << "["<< showtime() << "] Error! Fail to open the individual-specific allele frequency file " << AF_INDIV_FILE.c_str()  << "\n";
