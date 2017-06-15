@@ -1,15 +1,16 @@
 
 ####################################
-CXX=/opt/gcc-4.9.3/bin/g++ 
+#CXX=/opt/gcc-4.9.3/bin/g++ 
+CXX=g++
 ## Change $(CXX)
 
-ArmadilloPath = /mnt/projects/wangcl/ancestry/usr
+ArmadilloPath = ~/usr
 ## Change $(ArmadilloPath) if Armadillo were installed in a different directory
 
-OpenblasPath =  /mnt/projects/wangcl/ancestry/usr/opt/OpenBLAS
+OpenblasPath = ~/usr
 ## Change $(OpenblasPath) if OpenblasPath were installed in a different directory
 
-OpenblasLibPath =  /mnt/projects/wangcl/ancestry/usr/opt/OpenBLAS/lib
+OpenblasLibPath = ~/usr/lib
 ## Change $(OpenblasLibPath) if OpenblasPath were installed in a different directory
 ##################################
 
