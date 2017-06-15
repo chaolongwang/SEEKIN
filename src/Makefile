@@ -13,20 +13,14 @@ OpenblasLibPath =  /mnt/projects/wangcl/ancestry/usr/opt/OpenBLAS/lib
 ## Change $(OpenblasLibPath) if OpenblasPath were installed in a different directory
 ##################################
 
-
-
 # GCCVERSIONMAJOR := $(shell expr `$(CXX) -dumpversion | cut -f1-2 -d.` \>= 4.9) 
-
-CFLAGS=         -g -O3 -std=c++11 -pipe 
-        
-OBJS=		getAF.o  modelAF.o  kinship.o seekin.o 
-PROG=       seekin
-INCLUDES=   -I ../lib/libStatGen/include  -I $(ArmadilloPath)/include  -I $(OpenblasPath)/include
-SUBDIRS=    .
-LIBPATH=    -L/lib64 -L/usr/lib64 -L$(ArmadilloPath)/lib64
-LIBS=       -pthread ../lib/libStatGen.a  $(OpenblasLibPath)/libopenblas.a -lgfortran -lz -lm   
-
-
+CFLAGS = -g -O3 -std=c++11 -pipe -static
+OBJS = getAF.o  modelAF.o  kinship.o seekin.o 
+PROG = seekin
+INCLUDES = -I ../lib/libStatGen/include  -I $(ArmadilloPath)/include  -I $(OpenblasPath)/include
+SUBDIRS = .
+LIBPATH = -L/lib64 -L/usr/lib64 -L$(ArmadilloPath)/lib64
+LIBS = -pthread ../lib/libStatGen.a  $(OpenblasLibPath)/libopenblas.a -lgfortran -lz -lm   
 
 BIT_ERR = 0
 ifeq (,$(findstring $(shell uname -m), x86_64 ppc64 ia64))
@@ -39,14 +33,13 @@ endif
 		@printf "Compiling $<...                             \r"; \
 		$(CXX) -c $(CFLAGS) $(DFLAGS) $(INCLUDES) $< || echo "Error in command: $(CXX) -c $(CFLAGS) $(DFLAGS) $(INCLUDES) $<"
 
-
 all:	seekin
 
-seekin:	
+seekin:	$(OBJS)
 		@printf "Linking...                                                \r"
-		@$(CXX)   $(CFLAGS)  -static  -o $(PROG) $(OBJS)  $(LIBPATH) $(LIBS)   $(ENTRAFLAGS) -Xlinker -zmuldefs 
+		@$(CXX) $(CFLAGS) -o $(PROG) $(OBJS) $(LIBPATH) $(LIBS) $(ENTRAFLAGS) -Xlinker -zmuldefs 
 		@printf "$(PROG) compilation done.\n";
-		@$(CXX)  ./*.o  $(LIBPATH) $(LIBS) $(EXTRA_FLAGS) -o ../bin/seekin
+		@$(CXX) ./*.o $(LIBPATH) $(LIBS) $(EXTRA_FLAGS) -o ../bin/seekin
 		@cp $(PROG) ../bin/
 
 clean:
