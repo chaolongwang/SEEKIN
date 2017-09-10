@@ -1,0 +1,12 @@
+run_details:
+        production: http://plap18v:8080/rest/seqrun/illumina/run_num/detailanalysis/json
+        testing: http://qldb01:8180/rest/seqrun/illumina/run_num/detailanalysis/json
+lib_details:
+        production: http://plap18v:8080/rest/libinfo/lib_id/solexaRun/json
+        testing: http://qldb01:8180/rest/libinfo/lib_id/solexaRun/json
+sra_upload:
+        production: http://plap12v:9002/gismart/search
+        testing: http://dlap30v:9102/gismart/search
+stats_upload:
+        production: http://plap12v:8080/gisanalysis/rest/resource/submit/new/stats
+        testing: http://dlap54v:8058/gisanalysis/rest/resource/submit/new/stats

@@ -1,0 +1,29 @@
+#!/bin/bash
+#  initialization script.
+
+base=$(dirname $0)
+DJZ_ROOT=$(readlink -f $base 2>/dev/null)
+case "$1" in
+    -d)
+        DJZ_APPS="$DJZ_ROOT/apps.testing/"
+        DJZ_GENOMES="$DJZ_ROOT/genomes.testing/"
+        DJZ_ELMLOGDIR="$DJZ_ROOT/elm-logs.testing/"
+        ;;
+    *) 
+        DJZ_APPS="$DJZ_ROOT/apps/"
+        DJZ_GENOMES="$DJZ_ROOT/genomes/"
+        DJZ_ELMLOGDIR="$DJZ_ROOT/elm-logs/"
+        ;;
+esac
+
+for d in $DJZ_APPS $DJZ_GENOMES $DJZ_ELMLOGDIR; do
+	test -d $d || echo "WARN: $d does not exist" 1>&2
+done
+echo "export DJZ_ROOT=\"$DJZ_ROOT\";"
+echo "export DJZ_APPS=\"$DJZ_APPS\";"
+echo "export DJZ_GENOMES=\"$DJZ_GENOMES\";"
+echo "export DJZ_ELMLOGDIR=\"$DJZ_ELMLOGDIR\";"
+echo "export PERL5LIB=\"/mnt/software/lib/perl5/5.10.1${PERL5LIB:+:${PERL5LIB}}\";" 
+# No doket is used 
+#echo "eval $($DJZ_APPS/dotkit080521/init -b);"
+#echo "export DK_NODE=\"$DJZ_APPS/dotkit-djz\";"

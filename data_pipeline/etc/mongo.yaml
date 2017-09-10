@@ -1,0 +1,7 @@
+GIS:
+        test: "qlap33:27017"
+        production: "qldb01:27017,qlap37:27017,qlap38:27017,qlap39:27017"
+NSCC:
+        test: "qlap33:27017"
+        production: "qldb01:27017,qlap37:27017,qlap38:27017,qlap39:27017"
+

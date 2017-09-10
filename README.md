@@ -70,7 +70,8 @@ Here we provide demo of SEEKIN based on data provided in the `example/` folder, 
 
 * **Study.onSGVP.PC.coord**   This file contains the top 2 PCs for the study individuals in the SGVP reference ancestry space (`SGVP.RefPC.coord`). This file can be prepared using the [LASER](http://csg.sph.umich.edu/chaolong/LASER/) software with either sequence reads or genotypes. 
 
-  
+To generate the above files, you can use our companion pipeline in the folder `./data_pipeline/`.
+   
 ### 6.1. SEEKIN-hom: kinship estimation for homogenous samples
 
 When assuming no population structure, we only need the genotype file of study samples (`Study.10K.vcf.gz`) to estimate kinship using SEEKIN.   
