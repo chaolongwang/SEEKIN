@@ -26,7 +26,7 @@ Details of the SEEKIN method can be found in our paper:
 
 
 ## 3. Dependencies
-* gcc compiler (version >= 4.9)
+* gcc compiler (version >= 4.8)
 * [OpenBLAS](http://www.openblas.net/)
 * [Armadillo](http://arma.sourceforge.net/)
 
