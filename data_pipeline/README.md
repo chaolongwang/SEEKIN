@@ -41,7 +41,10 @@ After this step, all the jobs required to be run can be found in the folder `./j
 
 To perform variant calling, run the following command 
 ```
- $ snakemake -s $pipelinePath/Snakefile  --jobs 100  varCall --rerun-incomplete --timestamp --printshellcmds --stats logs/snakemake.stats --configfile run.yaml --latency-wait 60 --cluster-config cluster.yaml --drmaa " -pe OpenMP {threads} -l mem_free={cluster.mem} -l h_rt={cluster.time} -cwd -v PATH -e logs -o logs -w n" --jobname "SEEKIN.slave.{rulename}.{jobid}.sh" >> logs/snakemake.log 2>&1
+ $ snakemake -s $pipelinePath/Snakefile  --jobs 100  varCall --rerun-incomplete --timestamp --printshellcmds --stats logs/snakemake.stats \
+ --configfile run.yaml --latency-wait 60 --cluster-config cluster.yaml \
+ --drmaa " -pe OpenMP {threads} -l mem_free={cluster.mem} -l h_rt={cluster.time} -cwd -v PATH -e logs -o logs -w n" \
+ --jobname "SEEKIN.slave.{rulename}.{jobid}.sh" >> logs/snakemake.log 2>&1
 ```
 A genotype file called by BEAGLE will be available at `./snp/Beagle.gp.vcf.gz`.
 
