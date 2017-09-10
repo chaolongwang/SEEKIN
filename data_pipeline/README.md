@@ -59,7 +59,7 @@ The ancestry coordinates of study samples by LASER will be available at `./laser
 
 To perform kinship estimation, run the following command 
 ```
-$ snakemake -s $pipelinePath/Snakefile  --jobs 1  seekin --rerun-incomplete --timestamp --printshellcmds \
+$ snakemake -s $pipelinePath/Snakefile --jobs 1 seekin --rerun-incomplete --timestamp --printshellcmds \
 --stats logs/snakemake.stats --configfile run.yaml --latency-wait 60 --cluster-config cluster.yaml \
 --drmaa " -pe OpenMP {threads} -l mem_free={cluster.mem} -l h_rt={cluster.time} -cwd -v PATH -e logs -o logs -w n" \
 --jobname "SEEKIN.slave.{rulename}.{jobid}.sh" >> logs/snakemake.log 2>&1
