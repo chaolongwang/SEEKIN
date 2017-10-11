@@ -68,8 +68,8 @@ The kinship estimates and other outputs will be available in the folder `./seeki
 
 Changes to pipeline
 ---------
-* Fixed bug in splitting regions when the marker size of study dataset is smaller than the BLOCK_SIZE
-* Fixed bug in merging VCF files from different chromosomes
+* Fix a bug in splitting regions when the marker size of study dataset is smaller than the BLOCK_SIZE.
+* Fix a bug in merging VCF files from different chromosomes.
 
 Questions
 ---------
