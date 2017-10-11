@@ -227,13 +227,11 @@ The output files have the same format as described in [Section 6.1](https://gith
 ## 7. Change log
 
 * Version 1.0 (June 15, 2017)
-	** Initial release of SEEKIN
+  1. Initial release of SEEKIN.
 	
 * Version 1.01 (Oct 10, 2017) 
-
-	Add the data processing piepline 
-	
-	Add an algorithm mode for small study sample (e.g. n<10) 
+  1. Add the data processing piepline.
+  2. Add an algorithm mode for small study sample (e.g. n<10).
 
 ## 8. References
 
