@@ -22,7 +22,7 @@ If you have questions or find any bug in the software, please email Jinzhuang Do
 ## 2. Citation for SEEKIN 
 
 Details of the SEEKIN method can be found in our paper:  
-* <b>J Dou</b>, B Sun^, X Sim, JD Hughes, DF Reilly, ES Tai, J Liu, C Wang# (2017). Estimation of kinship coefficient in structured and admixed populations using sparse sequencing data. PLOS Genetics, 13: e1007021.
+* <b>J Dou</b>*, <b>B Sun</b>*, X Sim, JD Hughes, DF Reilly, ES Tai, J Liu, <b>C Wang</b># (2017). Estimation of kinship coefficient in structured and admixed populations using sparse sequencing data. <b>PLOS Genetics</b>, 13: e1007021.[link](http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1007021)
 
 
 ## 3. Dependencies
