@@ -30,7 +30,7 @@ string INPUT_FILE =default_str;
 string OUTPUT_FILE = default_str;
 string AF_REF_FILE = default_str;
 string AF_INDIV_FILE = "[]";
-string POP_STRUCT = default_str;
+string POP_STRUCT = "het";
 int WEIGHT=1;
 string LOG_FILE="seekin";
 string GENE_MODE = "DS"; 
@@ -38,6 +38,7 @@ double MAF_FILTER = 0.05;
 double R2_FILTER = 0.3;
 int BLOCK_SIZE=10000;
 int THREAD_NUM=1;
+int SMALL_SAMPLE_MODE=0;
 
 map<int,int> INDEX;
 map<int,string> overlapSNPlist; 
@@ -66,11 +67,11 @@ static void paraCheck();
 static int getVCFsampleNum(string inputfile);
 static void checkHeader(int af_indiv_sampleNum, int gp_sampleNum, map<int,int> & INDEX, string gp_file, string af_indiv_file);
 static map<string,int> getSNPlist(string inputfile);
-static fmat admixEst(string gp_file, string af_indiv_file, int gp_sampleNum, int BLOCK_SIZE, map<string, int> LIST, map <int, int> INDEX);
+static fmat admixEst(string gp_file, string af_indiv_file, int gp_sampleNum, int BLOCK_SIZE, map<string, int> LIST, map <int, int> INDEX, int SMALL_SAMPLE_MODE);
 static fmat homoEst(string gp_file, int gp_sampleNum, int BLOCK_SIZE);
 void blockWorkerAdmix(int & BLOCK_SIZE, int & gp_sampleNum, int &numWorking, atomic<bool>& queueFilled,
                     moodycamel::ConcurrentQueue<readThreadParams>& workQueue,
-                    moodycamel::ConcurrentQueue<fmat> & resultQueue);
+                    moodycamel::ConcurrentQueue<fmat> & resultQueue, int & SMALL_SAMPLE_MODE);
 
 void blockWorkerHomo(int & BLOCK_SIZE, int & gp_sampleNum, int &numWorking,
                     atomic<bool>& queueFilled,
@@ -97,6 +98,12 @@ int kinship(int argc, char ** argv){
 
     foutLog<<"["<< showtime() << "] MAF filter " << MAF_FILTER << "\n";
     foutLog<<"["<< showtime() << "] R2 filter " <<  R2_FILTER << "\n";
+    if(SMALL_SAMPLE_MODE==1){
+        cout << "["<< showtime() << "] Start the algorithm model for small sample size" << "\n";
+        foutLog << "["<< showtime() << "] Start the algorithm model for small sample size" << "\n";
+        POP_STRUCT="het";
+    }
+
 
     gp_sampleNum=getVCFsampleNum(INPUT_FILE);
     if(POP_STRUCT.compare("hom")==0){
@@ -106,7 +113,7 @@ int kinship(int argc, char ** argv){
         af_indiv_sampleNum=getVCFsampleNum(AF_INDIV_FILE);
         checkHeader(af_indiv_sampleNum, gp_sampleNum, INDEX, INPUT_FILE, AF_INDIV_FILE);
         map<string,int> LIST = getSNPlist (AF_INDIV_FILE);
-        KIN=admixEst(INPUT_FILE, AF_INDIV_FILE, gp_sampleNum, BLOCK_SIZE, LIST, INDEX);
+        KIN=admixEst(INPUT_FILE, AF_INDIV_FILE, gp_sampleNum, BLOCK_SIZE, LIST, INDEX, SMALL_SAMPLE_MODE);
     }
 
     output(KIN, OUTPUT_FILE, gp_sampleNum, INPUT_FILE, overlapSNPcnt);
@@ -258,7 +265,7 @@ void blockWorkerHomo(int & BLOCK_SIZE, int & gp_sampleNum, int &numWorking,
     --numWorking;    
 }
 
-static fmat admixEst(string gp_file, string af_indiv_file, int gp_sampleNum, int BLOCK_SIZE, map<string, int> LIST, map <int, int> INDEX) {
+static fmat admixEst(string gp_file, string af_indiv_file, int gp_sampleNum, int BLOCK_SIZE, map<string, int> LIST, map <int, int> INDEX, int SMALL_SAMPLE_MODE) {
     
     moodycamel::ConcurrentQueue <fmat> resultQueue;
     moodycamel::ConcurrentQueue <readThreadParams> workQueue;
@@ -271,7 +278,7 @@ static fmat admixEst(string gp_file, string af_indiv_file, int gp_sampleNum, int
     fmat P = zeros <fmat> (BLOCK_SIZE, gp_sampleNum);    // individual AF 
     map<int, string> overlapSNPlist;
     int numWorking=1;
-    workers.emplace_back(blockWorkerAdmix,ref(BLOCK_SIZE), ref(gp_sampleNum),ref(numWorking),ref(queueFilled),ref(workQueue),ref(resultQueue));
+    workers.emplace_back(blockWorkerAdmix,ref(BLOCK_SIZE), ref(gp_sampleNum),ref(numWorking),ref(queueFilled),ref(workQueue),ref(resultQueue),ref(SMALL_SAMPLE_MODE));
 
     VcfFileReader reader; 
     VcfHeader header;
@@ -385,7 +392,7 @@ static fmat admixEst(string gp_file, string af_indiv_file, int gp_sampleNum, int
 void blockWorkerAdmix(int & BLOCK_SIZE, int & gp_sampleNum, int &numWorking,
                     atomic<bool>& queueFilled,
                     moodycamel::ConcurrentQueue<readThreadParams>& workQueue,
-                    moodycamel::ConcurrentQueue<fmat> & resultQueue){
+                    moodycamel::ConcurrentQueue<fmat> & resultQueue, int & SMALL_SAMPLE_MODE){
 
     bool gotNewStart{false};
     fmat V1= ones <fmat> (gp_sampleNum, 1);
@@ -397,10 +404,15 @@ void blockWorkerAdmix(int & BLOCK_SIZE, int & gp_sampleNum, int &numWorking,
         if (!gotNewStart) { continue; }
         gotNewStart = false; 
         m.G=0.5*m.G;
-        m.G-=m.P%(m.r*V1.t());
-        m.G-=mean(m.G,1)*V1.t();
 
-        int i=0;
+        if(SMALL_SAMPLE_MODE==1){
+            m.G-=m.P%(m.r*V1.t())+mean(m.P,1)%(1-m.r)*V1.t();
+        }
+        else{
+            m.G-=m.P%(m.r*V1.t());
+            m.G-=mean(m.G,1)*V1.t();
+        }
+
         if(WEIGHT==1){
             fmat adjustG=m.G+m.P%((m.r-sqrt(m.r))*V1.t());
             adjustG-=mean(adjustG,1)*V1.t();
@@ -550,6 +562,7 @@ Options:
       -p  Kinship estimator. hom: homogeneous estimator; het: heterogeneous estimator. [default "het"]
       -w  Weighting scheme to combine estimates from multiple SNPs. 
           1: MAF(1-MAF)Rsq^2; 2: Rsq^2. [default 1]  
+      -s  Specify whether a mode for small sample size (typically < 10 ) should be used. 0: false; 1: true. [default "0"]
       -l  Number of SNPs in each computing block. [default 10,000]  
       -t  Number of threads for parallel computation. [default 10] 
       -o  Prefix of output file names. 
@@ -624,6 +637,7 @@ static void paraCheck (){
     fprintf ( stdout, " -m %f \n", MAF_FILTER);
     fprintf ( stdout, " -d %s \n", GENE_MODE.c_str() );
     fprintf ( stdout, " -p %s \n", POP_STRUCT.c_str() );
+    fprintf ( stdout, " -s %d \n", SMALL_SAMPLE_MODE);
     // The output of weight is always zero, fix me. 
     fprintf ( stdout, " -w %d \n", WEIGHT);
     fprintf ( stdout, " -l %d \n", BLOCK_SIZE);
@@ -662,6 +676,12 @@ static void paraCheck (){
         exit(-1);    
     }
 
+    if (SMALL_SAMPLE_MODE !=0 &&  SMALL_SAMPLE_MODE !=1){
+        cout<<"["<< showtime() << "] Error! The value of SMALL_SAMPLE_MODE is neither 0 nor 1!\n";
+        foutLog<<"["<< showtime() << "] Error! The value of SMALL_SAMPLE_MODE is neither 0 nor 1!\n";
+        display_usage();
+        exit(-1);    
+    }
 
 
     if (POP_STRUCT.compare(default_str)==0){
@@ -738,6 +758,12 @@ static void paraCheck (){
         display_usage();
         exit(-1);
     }
+
+    if(SMALL_SAMPLE_MODE==1){
+        cout << "["<< showtime() << "] Start the algorithm model for small sample size, make sure that the individual-specific allele frequency file exists" << "\n";
+        foutLog << "["<< showtime() << "] Start the algorithm model for small sample size, make sure that the individual-specific allele frequency file exists" << "\n";
+    }
+
     if(GENE_MODE.compare("DS")==0 |  GENE_MODE.compare("GT")==0 ){;}
     else{
         cout << "["<< showtime() << "] Error! No mode is identified, please use DS or GT" << "\n";
@@ -773,7 +799,7 @@ static void initenv (int argc, char ** argv){
     char copt;
     int input=0;
 
-    while((copt=getopt(argc, argv, "i:f:r:m:w:d:p:l:t:o:h")) != EOF){
+    while((copt=getopt(argc, argv, "i:f:r:m:w:d:s:p:l:t:o:h")) != EOF){
         switch(copt){   
             case 'i':
                 input = 1;
@@ -799,6 +825,9 @@ static void initenv (int argc, char ** argv){
                 continue;
             case 'l':
                 BLOCK_SIZE=atof(optarg);
+                continue;
+            case 's':
+                SMALL_SAMPLE_MODE=atof(optarg);
                 continue;
             case 'p':
                 POP_STRUCT=strdup(optarg);

@@ -75,6 +75,7 @@ sub getPileup2SeqCMD(){
   my $libraryID=$global{SWAP_ID};
   my $coordList="";
   open OO, ">$OUTPUT_DIR/jobfiles/runLASER_batch.sh";
+
   open O1, ">$output/ID.index";
 
   mkdir($output, 0700) unless(-d $output);
@@ -87,7 +88,7 @@ sub getPileup2SeqCMD(){
 
   
   my $id="";
-  $BATCH_SIZE=39;
+  $BATCH_SIZE=$global{"LASER_BATCH_SIZE"};
   open (FIN, $bamList) || die "can't open $bamList: $!";
   open T, ">$OUTPUT_DIR/tmp/laser.batch.lst";
   for(my $j=0; $j<($N/$BATCH_SIZE); $j++){
@@ -103,8 +104,7 @@ sub getPileup2SeqCMD(){
                   my @tmp=split(/\./,$id);
                   print O1 "$j"."_$i $tmp[0]\n";
                   print OUT "$samtoolsPath mpileup -q 20 -Q 20 \\\n  -f $refPath  \\\n  -l $refBed \\\n  $bam \\\n  >$output/$j"."_$i.pileup\n\n";
-          $str=$str."\\\n  $output/$j"."_$i.pileup ";
-                  
+          	  $str=$str."\\\n  $output/$j"."_$i.pileup ";
                   last if eof(FIN);
           }
           $str=$str."\\\n";
@@ -128,9 +128,11 @@ sub getPileup2SeqCMD(){
   print O3 "\n# Generate the beta file for the chosen refernece panel\n\n";
   print O3 "$SEEKIN modelAF  \\\n  -i $global{LASER_REF_VCF}  \\\n  -c $coord  \\\n  -k  $pca_seekin  \\\n  -o $output/REF.beta\n\n";
   print O3 "$SEEKIN  getAF  \\\n  -i  $output/laser.seqPC.coord -k $pca_seekin \\\n  -b  $output/REF.beta  \\\n  -o  $output/All.af\n\n";
+  print O3 "perl $app/../scripts/getIndex.pl\n\n";
   print O3 "bcftools reheader -s $output/ID.index   $output/All.af.gz  \\\n  > $output/seekin.final.af.gz \n\n";
   print O3 "tabix -p vcf $output/seekin.final.af.gz \n\n";
-  print O3 "$SEEKIN  kinship  \\\n  $global{SEEKIN_PAR_SET} \\\n  -i ./snp/Beagle.gp.vcf.gz \\\n  -f ./laser/seekin.final.af.gz\\\n  -o ./seekin/seekin \n";
+  print O3 "$SEEKIN  kinship  \\\n  $global{SEEKIN_PAR_SET} \\\n  -i ./snp/Beagle.gp.vcf.gz \\\n  -f ./laser/seekin.final.af.gz\\\n  -o ./seekin/seekin \n\n";
+  print O3 "touch ./seekin/seekin.OK\n\n";
   close O2;
   close O3;
 }

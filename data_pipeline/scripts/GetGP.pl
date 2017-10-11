@@ -104,6 +104,8 @@ sub getCMD(){
 	}
 	else{
 		my $ii=0;
+		my $outputID = "";
+		my $chuck_size_default = $global{"CHUNCK_SIZE"};
 		open O1, ">$tmpDir/region.Lst";
 		for($ii=1;$ii<=$chr_bed_cnt;$ii++){
 			my $line1=0;
@@ -133,11 +135,16 @@ sub getCMD(){
 					}
 			}
 			close F;
+			####
+			####  modify the CHUNCK_SIZE when the marker number is smaller than specified chunck size
+			####  
 
 
 			mkdir($global{OUT_DIR},0700) unless (-d $global{OUT_DIR} );
 			mkdir($folder, 0700) unless(-d $folder);
-
+			
+			if($line1<$chuck_size_default) {$global{CHUNCK_SIZE} = $line1;}
+			else{ $global{CHUNCK_SIZE} = $chuck_size_default;}
 	
 			for(my $i=1;$i<=$line1-$global{"CHUNCK_SIZE"}/2;$i=$i+$global{"CHUNCK_SIZE"}){
 				my $tmp=$i+$global{"CHUNCK_SIZE"}+$global{"CHUNCK_OVERLAP"};
@@ -150,23 +157,35 @@ sub getCMD(){
 				close O;
 				print O1 "$chrID{$i}"."_"."$hash1{$i}"."_"."$hash1{$tmp}\n";
 			}
+			
+			if($line2<$chuck_size_default) {$global{CHUNCK_SIZE} = $line2;}
+			else { $global{CHUNCK_SIZE} = $chuck_size_default;}
 
 			for(my $i=1;$i<=$line2-$global{"CHUNCK_SIZE"}/2;$i=$i+$global{"CHUNCK_SIZE"}){
 				my $tmp=$i+$global{"CHUNCK_SIZE"}+$global{"CHUNCK_OVERLAP"};
 				if ($line2-$tmp<=$global{"CHUNCK_SIZE"}/2){$tmp=$line2;}
 				open O, ">$folder/getGP_chr"."$chrID{$i}"."_"."$hash2{$i}"."_"."$hash2{$tmp}".".sh";
 				my $region="$chrID{$i}:$hash2{$i}-$hash2{$tmp}";
-				my $outputID="$chrID{$i}_$hash2{$i}_$hash2{$tmp}";
+				$outputID="$chrID{$i}_$hash2{$i}_$hash2{$tmp}";  # Use this variable latter
 				my $cmd=writeCMD($region, $outputID, $chr_bed_list{$ii}, $chr_freq_list{$ii}, $chr_vcf_list{$ii});
 				print O "$cmd\n";
 				close O;
 				print O1 "$chrID{$i}"."_"."$hash2{$i}"."_"."$hash2{$tmp}\n";
 			}
 			open O, ">$folder/merge_chr$ii".".sh";
-			my $mergeCMD="$global{JAVA}  -jar $app/BEAGLE/mergevcf.jar  $ii  $beagleMerge > $global{OUT_DIR}/chr$ii.gp.vcf";
-			print O "$mergeCMD\n";
-			$mergeCMD="bgzip  -f  $global{OUT_DIR}/chr$ii.gp.vcf";
-			print O "$mergeCMD\n";
+			$beagleMerge=~s/^ +//; 
+			my @tmp = split(/\s+|\t/,$beagleMerge);
+			if (scalar(@tmp) > 1) {
+				my $mergeCMD="$global{JAVA}  -jar $app/BEAGLE/mergevcf.jar  $ii  $beagleMerge > $global{OUT_DIR}/chr$ii.gp.vcf";
+				print O "$mergeCMD\n";
+				$mergeCMD="bgzip  -f  $global{OUT_DIR}/chr$ii.gp.vcf";
+				print O "$mergeCMD\n";
+			}
+			else{
+				my $mergeCMD="cp $global{OUT_DIR}/$outputID.gp.vcf.gz  $global{OUT_DIR}/chr$ii.gp.vcf.gz";
+				print O "$mergeCMD\n";
+				
+			}
 			close O;
 			#print OO "qsub -b y  -l mem_free=20G,h_rt=2:0:0  -e ./log   -o  ./log   -q short.q  -v PATH -cwd -terse -N snpChrMerge$ii -hold_jid $hold_id  -pe OpenMP 1 bash $folder/merge_chr$ii".".sh\n\n";
 			#print O1 "qsub -b y  -l mem_free=20G,h_rt=2:0:0  -e ./log   -o  ./log   -q short.q  -v PATH -cwd -terse -N snpChrMerge$ii -pe OpenMP 1 bash $folder/merge_chr$ii".".sh\n\n";
@@ -181,8 +200,8 @@ sub getCMD(){
 		$merge_hold_id=$merge_hold_id.",snpChrMerge$i";
 		$merge_chr_str=$merge_chr_str." $global{OUT_DIR}/chr$i.gp.vcf.gz";
 	}
-
-	print O "$app/vcf-concat $merge_chr_str | bgzip -c > $global{OUT_DIR}/Beagle.gp.vcf.gz\n\n";
+	## merge vcf files from different chr other than using vcf-concat
+	print O "zcat $merge_chr_str | sed '500,1000000000000{/#/d;}'  |  bgzip -c > $global{OUT_DIR}/Beagle.gp.vcf.gz\n\n";
 	close O;
 	#print OO "qsub -b y  -l mem_free=10G,h_rt=2:0:0  -e ./log   -o  ./log   -q short.q  -v PATH -cwd -terse -N MergeChr -hold_jid $merge_hold_id  -pe OpenMP 1 bash $folder/merge_chr.sh\n\n"
 

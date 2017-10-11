@@ -42,7 +42,7 @@ int main (int argc, char ** argv ){
 
 	cout << R"(
 SEEKIN: SEquence-based Estimation of kinship
-Version 1.00: released on 2017-Mar-10
+Version 1.01: released on 2017-Oct-10
 )";
 	argc--;
 	argv++;

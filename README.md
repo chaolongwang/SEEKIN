@@ -22,7 +22,7 @@ If you have questions or find any bug in the software, please email Jinzhuang Do
 ## 2. Citation for SEEKIN 
 
 Details of the SEEKIN method can be found in our paper:  
-* Dou J, Sun B, Sim X, Hughes JD, Reilly DF, Tai ES, Liu J, Wang C. Estimation of kinship coefficient in structured and admixed populations using sparse sequencing data. (Manuscript submitted)
+* J Dou^, B Sun^, X Sim, JD Hughes, DF Reilly, ES Tai, J Liu, C Wang# (2017). Estimation of kinship coefficient in structured and admixed populations using sparse sequencing data. PLOS Genetics, 13: e1007021.
 
 
 ## 3. Dependencies
@@ -95,6 +95,8 @@ Options:
       -p  Kinship estimator. hom: homogeneous estimator; het: heterogeneous estimator. [default "het"]
       -w  Weighting scheme to combine estimates from multiple SNPs. 
           1: MAF(1-MAF)Rsq^2; 2: Rsq^2. [default 1]  
+      -s  Specify whether a mode for small sample size (typically < 10 ) would be used. 
+	  0: false; 1: true. [default "0"]
       -l  Number of SNPs in each computing block. [default 10,000]  
       -t  Number of threads for parallel computation. [default 10] 
       -o  Prefix of output file names. 
@@ -222,9 +224,15 @@ Note that it is important to set `–p` to 'het' so that the SEEKIN-het estimato
 
 The output files have the same format as described in [Section 6.1](https://github.com/jinzhuangdou/SEEKIN/blob/master/README.md#61-seekin-hom-kinship-estimation-for-homogenous-samples).
 
+## 7. Change log
 
+* Version 1.0 (June 15, 2017)
+	Initial release of SEEKIN
+* Version 1.01 (Oct 10, 2017)
+	Add the data processing piepline 
+	Add the algorithm mode when the study sample size is very small (typically < 100) 
 
-## 7. References
+## 8. References
 
 1.  Wang C et al. (2014) Ancestry estimation and control of population stratification for sequence-based association studies. Nat Genet 46, 409-415.
 2.  Wang C et al. (2015) Improved ancestry estimation for both genotyping and sequencing data using projection Procrustes analysis and genotype imputation. Am J Hum Genet 96, 926-937.
