@@ -66,7 +66,7 @@ $ snakemake -s $pipelinePath/Snakefile --jobs 1 seekin --rerun-incomplete --time
 ```
 The kinship estimates and other outputs will be available in the folder `./seekin`.
 
-Changes to Pipelines
+Changes to pipeline
 ---------
 * Fixed bug in splitting regions when the marker size of study dataset is smaller than the BLOCK_SIZE
 * Fixed bug in merging VCF files from different chromosomes
